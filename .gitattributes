@@ -1,0 +1,8 @@
+# Keep ordinary source and Markdown files consistent across machines.
+* text=auto eol=lf
+
+# Preserve the recorded bytes of completed experiment artifacts.
+**/runs/** -text whitespace=cr-at-eol
+
+*.pptx binary
+*.png binary

@@ -1,0 +1,17 @@
+{
+  "note": "Recorded after source check; code snapshot copied after execution",
+  "files": [
+    {
+      "path": "D:\\研究M1\\第2回ゼミ発表\\step01_文献調査と実験設計\\scripts\\verify_oss_sources.py",
+      "sha256": "aaaacc476a6ddc152bce3b4d88aa8a64157a191cea82b6bac02c801f4ec2a4db"
+    },
+    {
+      "path": "D:\\研究M1\\第2回ゼミ発表\\step01_文献調査と実験設計\\runs\\20261030_oss_sources_01\\code_snapshot\\verify_oss_sources.py",
+      "sha256": "aaaacc476a6ddc152bce3b4d88aa8a64157a191cea82b6bac02c801f4ec2a4db"
+    },
+    {
+      "path": "D:\\研究M1\\第2回ゼミ発表\\step01_文献調査と実験設計\\runs\\20261030_oss_sources_01\\sources.json",
+      "sha256": "5befdf48272993849f9adcf005483ea29c0af69b400d2ef52be94c659934ce58"
+    }
+  ]
+}

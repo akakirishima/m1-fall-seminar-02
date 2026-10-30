@@ -1,0 +1,43 @@
+# Local dependencies and caches
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local credentials and machine settings
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+.DS_Store
+Thumbs.db
+
+# Regenerable builds and slide inspection images
+dist/
+.slidev/
+/スライド/exports/*.png
+/スライド/exports/png/
+
+# Raw recordings and model weights remain outside Git
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.wmv
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+*.gguf
+/data/raw/
+/datasets/
+/models/
+
+# Reference presentations contain embedded videos; retain locally
+/スライド/references/*.pptx
