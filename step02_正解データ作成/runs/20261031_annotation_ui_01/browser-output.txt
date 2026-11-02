@@ -1,0 +1,62 @@
+### Ran Playwright code
+```js
+await (async (page) => {
+  const root="/Users/kirishima/Documents/ChatGPT/\u7b2c\uff12\u56de\u30bc\u30dfmac\u74b0\u5883";
+  const errors=[]; page.on('pageerror',e=>errors.push(e.message));
+  await page.evaluate(()=>localStorage.clear()); await page.reload();
+  const paths=['frame1.png','frame2.png','frame3.png'].map(n=>root+'/data/local/annotation-smoke/'+n);
+  await page.getByLabel('画像を選択',{exact:true}).setInputFiles(paths);
+  await page.getByRole('button',{name:'ROIを描く',exact:true}).waitFor({state:'visible'});
+  await page.waitForFunction(()=>!document.getElementById('roiStart').disabled);
+  await page.getByRole('button',{name:'ROIを描く',exact:true}).click();
+  const c=page.locator('canvas'); const b=await c.boundingBox();
+  for(const [x,y] of [[.1,.1],[.9,.1],[.9,.9],[.1,.9]])await c.click({position:{x:b.width*x,y:b.height*y}});
+  await page.getByRole('button',{name:'ROI確定',exact:true}).click();
+  await page.keyboard.press('1');
+  await page.waitForFunction(()=>document.getElementById('position').textContent==='2 / 3' && !document.getElementById('absent').disabled);
+  await page.keyboard.press('2');
+  await page.waitForFunction(()=>document.getElementById('position').textContent==='3 / 3' && !document.getElementById('uncertain').disabled);
+  await page.keyboard.press('3');
+  if(await page.locator('#countUncertain').textContent()!=='0')throw Error('uncertain accepted without reason');
+  await page.getByRole('textbox',{name:'この画像のメモ（判定不能では必須）'}).fill('合成テスト：反射か不明');
+  await page.getByRole('button',{name:'判定不能 3',exact:true}).click();
+  if(await page.locator('#countPresent').textContent()!=='1'||await page.locator('#countAbsent').textContent()!=='1'||await page.locator('#countUncertain').textContent()!=='1'||await page.locator('#ratio').textContent()!=='50.0%')throw Error('wrong counts');
+  if(!await page.getByRole('button',{name:'ROIを描く',exact:true}).isDisabled())throw Error('ROI changed after labelling');
+  const jp=page.waitForEvent('download');await page.getByRole('button',{name:'作業を保存（JSON）'}).click();
+  const jsonDownload=await jp;const jsonPath=root+'/data/local/annotation-smoke/export.json';await jsonDownload.saveAs(jsonPath);
+  const cp=page.waitForEvent('download');await page.getByRole('button',{name:'ラベルを書き出す（CSV）'}).click();await(await cp).saveAs(root+'/data/local/annotation-smoke/export.csv');
+  await page.reload();await page.getByLabel('画像を選択',{exact:true}).setInputFiles(paths);
+  await page.waitForFunction(()=>document.getElementById('countUncertain').textContent==='1');
+  await page.getByRole('textbox',{name:'介入ありのキー'}).fill('a');
+  await page.getByRole('button',{name:'キーを反映',exact:true}).click();
+  await page.keyboard.press('ArrowLeft');
+  await page.waitForFunction(()=>document.getElementById('position').textContent==='2 / 3'&&!document.getElementById('present').disabled);
+  await page.keyboard.press('a');
+  if(await page.locator('#countPresent').textContent()!=='2')throw Error('custom key failed');
+  await page.evaluate(()=>localStorage.clear());await page.reload();
+  await page.getByLabel('画像を選択',{exact:true}).setInputFiles(paths);
+  await page.waitForFunction(()=>!document.getElementById('roiStart').disabled);
+  await page.getByLabel('保存した作業を読み込む',{exact:true}).setInputFiles(jsonPath);
+  await page.waitForFunction(()=>document.getElementById('countUncertain').textContent==='1');
+  await page.getByRole('textbox',{name:'この画像のメモ（判定不能では必須）'}).fill('');
+  if(await page.locator('#countUncertain').textContent()!=='0')throw Error('uncertain without note survived');
+  await page.screenshot({path:root+'/output/playwright/annotation-smoke.png',fullPage:true});
+  if(errors.length)throw Error(JSON.stringify(errors));
+  console.log('PASS: ROI, hotkeys, auto-next, uncertain guard, counts, exports, auto-restore, custom keys, JSON import, note validation; page errors=0');
+  await page.evaluate(()=>localStorage.clear());await page.reload();
+}
+)(page);
+```
+### Page
+- Page URL: http://127.0.0.1:8765/
+- Page Title: 介入ラベル付け
+### Events
+- New console entries: .playwright-cli/console-2026-10-30T11-48-22-728Z.log#L2-L8
+- Downloading file annotation-2026-10-31T00-12-20-820Z.json ...
+- Downloaded file annotation-2026-10-31T00-12-20-820Z.json to ".playwright-cli/annotation-2026-10-31T00-12-20-820Z.json"
+- Downloading file annotation-2026-10-31T00-12-21-020Z.csv ...
+- Downloaded file annotation-2026-10-31T00-12-21-020Z.csv to ".playwright-cli/annotation-2026-10-31T00-12-21-020Z.csv"
+- Downloading file annotation-2026-10-31T00-12-43-468Z.json ...
+- Downloaded file annotation-2026-10-31T00-12-43-468Z.json to ".playwright-cli/annotation-2026-10-31T00-12-43-468Z.json"
+- Downloading file annotation-2026-10-31T00-12-43-568Z.csv ...
+- Downloaded file annotation-2026-10-31T00-12-43-568Z.csv to ".playwright-cli/annotation-2026-10-31T00-12-43-568Z.csv"

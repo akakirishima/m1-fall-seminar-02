@@ -10,6 +10,13 @@ from urllib.parse import unquote, urlsplit
 
 
 DOCUMENTS = [
+    "step01_文献調査と実験設計/実験計画と着手順.md",
+    "step01_文献調査と実験設計/文献確認表.md",
+    "step01_文献調査と実験設計/評価条件固定票.md",
+    "step02_正解データ作成/注釈試行手順.md",
+    "step02_正解データ作成/CSV仕様.md",
+    "step03_各手法の実装と実験/環境確認と少数実験.md",
+    "step01_文献調査と実験設計/runs/20261030_literature_01/実行結果.md",
     "README.md", "AGENTS.md", "研究全体像.md", "方針変更履歴.md",
     "共通/使用OSSと出典.md", "共通/ラベル付け規則.md", "共通/評価方法.md",
     "共通/実験記録の運用.md", "共通/データ一覧と分割/README.md",
@@ -57,8 +64,10 @@ def main():
     ):
         if not (args.root / name).is_dir():
             errors.append({"file": name, "error": "Missing directory"})
-    for name in ("verify_oss_sources.py", "verify_project_structure.py"):
+    for name in ("verify_oss_sources.py", "verify_project_structure.py", "inspect_intervention_paper.py"):
         path = args.root / "step01_文献調査と実験設計/scripts" / name
+        ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    for path in (args.root / "step02_正解データ作成").rglob("*.py"):
         ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
     sources = json.loads((args.root / "step01_文献調査と実験設計/runs/20261030_oss_sources_01/sources.json").read_text(encoding="utf-8"))
     if len(sources["repositories"]) != 12 or len(sources["models"]) != 2 or sources["errors"]:

@@ -1,0 +1,20 @@
+test_bad_label (test_validate_dataset.DatasetTests.test_bad_label) ... ok
+test_csv_extra_column (test_validate_dataset.DatasetTests.test_csv_extra_column) ... ok
+test_disjoint_coverage (test_validate_dataset.DatasetTests.test_disjoint_coverage) ... ok
+test_empty_templates (test_validate_dataset.DatasetTests.test_empty_templates) ... ok
+test_independent_annotators (test_validate_dataset.DatasetTests.test_independent_annotators) ... ok
+test_missing_file (test_validate_dataset.DatasetTests.test_missing_file) ... ok
+test_nan_and_out_of_range (test_validate_dataset.DatasetTests.test_nan_and_out_of_range) ... ok
+test_outside_coverage (test_validate_dataset.DatasetTests.test_outside_coverage) ... ok
+test_overlapping_labels (test_validate_dataset.DatasetTests.test_overlapping_labels) ... ok
+test_patient_leakage (test_validate_dataset.DatasetTests.test_patient_leakage) ... ok
+test_split_version_mixing (test_validate_dataset.DatasetTests.test_split_version_mixing) ... ok
+test_uncertain_without_reason (test_validate_dataset.DatasetTests.test_uncertain_without_reason) ... ok
+test_unlabelled_gap (test_validate_dataset.DatasetTests.test_unlabelled_gap) ... ok
+test_valid_half_open_boundaries (test_validate_dataset.DatasetTests.test_valid_half_open_boundaries) ... ok
+test_wrong_patient (test_validate_dataset.DatasetTests.test_wrong_patient) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.028s
+
+OK

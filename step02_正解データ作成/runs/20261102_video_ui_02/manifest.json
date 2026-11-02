@@ -1,0 +1,32 @@
+{
+  "run_id": "20261102_video_ui_02",
+  "status": "success",
+  "kind": "synthetic-video browser UI verification; not model evaluation",
+  "date_jst": "2026-11-02",
+  "command": "playwright-cli -s=videoannotation run-code [video-smoke.js with PROJECT_ROOT replaced by repository path]",
+  "environment": {
+    "python": "3.15.0 (main, Oct  9 2026, 11:16:41) [Clang 21.0.0 (clang-2100.3.34.2)]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "node": "v25.2.1"
+  },
+  "input": {
+    "file": "data/local/video-smoke/synthetic.webm",
+    "sha256": "b3fc975b905d4bce2f48fe7083725d22c18acbb417d21e07cc54f1e92fa6e2c9"
+  },
+  "code_sha256": {
+    "video.html": "4e7d783198b25414fc2894a2be75194155f4af21d3acb628d2702bc32782a283",
+    "serve.py": "c68ed41d67c0a1912dcff680a16b430c0480a335725baf60b53afc375c0d4845",
+    "video-model.test.js": "91609c4b42c48dc0982a3fb4b24621198ff09857274dcc3c1ffbbc9e5ba9b501",
+    "video-smoke.js": "8d432e44e2877aeef635aeceeac26e0a4d0b44abb05ba5b3f5e21337f020c966",
+    "style.css": "1b6029163245b32a624590c8aa655cf75f47f04bccfaa5e331a81d50298f23d3",
+    "video.js": "962dac1fc6e17c2b599f206c7cd3935d480b2294c382bb94469fd9ce81f9087b",
+    "generate_video_fixture.py": "b058f2df8c005d174756919e561bf8e2a5b7f41c6ac13ec58860cf109c4582a1",
+    "video.css": "92f0d83c2af33a4144e92791ea41cbf27082bfcd9a4aa1619b34537cf303d1bd",
+    "video-model.js": "999c8cd9100e5f1cd4d131bfa120d2ea544876cd3e053e03299dda703d819f32"
+  },
+  "output_sha256": {
+    "export.json": "bdbf91f8c54a0c69ada0a774d587725cd0031b40901dc30a0efa4e550ae5ad6d",
+    "export.csv": "b26b17efe4c0517049596d7dee30e333aa2e85a0262d1c62948edede390c204e"
+  },
+  "browser_log_sha256": "c6807aa68a7b4ca12055da5df7731e3867552c716ead516d46e517e321bc9f09"
+}

@@ -41,3 +41,16 @@ dist/
 
 # Reference presentations contain embedded videos; retain locally
 /スライド/references/*.pptx
+
+# Local patient metadata, annotations, and tool project files
+/data/local/
+*.eaf
+*.pfsx
+
+# Browser verification artifacts
+.playwright-cli/
+/output/playwright/
+
+# Additional source-video formats supported by the annotation UI
+*.webm
+*.m4v

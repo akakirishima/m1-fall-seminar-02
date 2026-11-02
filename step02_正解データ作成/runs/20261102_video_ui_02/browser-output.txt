@@ -1,0 +1,53 @@
+### Ran Playwright code
+```js
+await (async page=>{
+ const root="/Users/kirishima/Documents/ChatGPT/\u7b2c\uff12\u56de\u30bc\u30dfmac\u74b0\u5883", errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('http://127.0.0.1:8765/video.html');
+ await page.evaluate(()=>{for(const k of Object.keys(localStorage))if(k.startsWith('infant-video-interval-v1:'))localStorage.removeItem(k);});
+ const file=root+'/data/local/video-smoke/synthetic.webm';
+ await page.getByLabel('動画ファイルを選択',{exact:true}).setInputFiles(file);
+ await page.waitForFunction(()=>!document.getElementById('roiStart').disabled);
+ await page.getByRole('button',{name:'ROIを描く',exact:true}).click();
+ const c=page.locator('#overlay'),b=await c.boundingBox();
+ for(const [x,y]of [[.1,.1],[.9,.1],[.9,.9],[.1,.9]])await c.click({position:{x:b.width*x,y:b.height*y}});
+ await page.getByRole('button',{name:'ROI確定',exact:true}).click();
+ const seek=async t=>{await page.locator('#scrub').evaluate((el,t)=>{el.value=t;el.dispatchEvent(new Event('input'));},t);await page.waitForFunction(t=>Math.abs(document.getElementById('video').currentTime-t)<.02,t);};
+ await seek(1);await page.keyboard.press('i');await seek(2);await page.keyboard.press('o');await page.keyboard.press('1');
+ if(await page.locator('#intervalCount').textContent()!=='1件')throw Error('I/O key interval failed');
+ await seek(4);await page.keyboard.press('o');await page.keyboard.press('2');
+ if(await page.locator('#ratio').textContent()!=='33.3%')throw Error('duration ratio incorrect');
+ await page.getByRole('button',{name:'選択を解除して新しい区間',exact:true}).click();
+ const t=await page.locator('#timeline').boundingBox();
+ await page.mouse.move(t.x+t.width*.75,t.y+35);await page.mouse.down();await page.mouse.move(t.x+t.width*(5.5/6),t.y+35,{steps:8});await page.mouse.up();
+ await page.getByRole('button',{name:'判定不能 3',exact:true}).click();
+ if(await page.locator('#intervalCount').textContent()!=='2件')throw Error('uncertain without reason accepted');
+ await page.getByRole('textbox',{name:'区間のメモ（判定不能では必須）'}).fill('合成テスト');
+ await page.getByRole('button',{name:'判定不能 3',exact:true}).click();
+ if(await page.locator('#intervalCount').textContent()!=='3件')throw Error('timeline drag interval failed');
+ await page.getByRole('spinbutton',{name:'開始（秒）'}).fill('1.5');await page.getByRole('spinbutton',{name:'終了（秒）'}).fill('2.5');await page.getByRole('button',{name:'介入あり 1',exact:true}).click();
+ if(!(await page.locator('#message').textContent()).includes('重な'))throw Error('overlap not rejected');
+ await page.getByRole('button',{name:'選択を解除して新しい区間',exact:true}).click();
+ await page.locator('#rows button').last().click();
+ const grip=page.locator('.segment.selected .handle.right');await grip.scrollIntoViewIfNeeded();const g=await grip.boundingBox();const t2=await page.locator('#timeline').boundingBox();
+ await page.mouse.move(g.x+g.width/2,g.y+g.height/2);await page.mouse.down();await page.mouse.move(t2.x+t2.width*(5.8/6),g.y+g.height/2,{steps:8});await page.mouse.up();
+ if(Number(await page.getByRole('spinbutton',{name:'終了（秒）'}).inputValue())<5.7)throw Error('drag resize failed');
+ const jp=page.waitForEvent('download');await page.getByRole('button',{name:'作業を保存（JSON）'}).click();const jsonPath=root+'/data/local/video-smoke/export.json';await(await jp).saveAs(jsonPath);
+ const cp=page.waitForEvent('download');await page.getByRole('button',{name:'区間を書き出す（CSV）'}).click();await(await cp).saveAs(root+'/data/local/video-smoke/export.csv');
+ await page.getByRole('button',{name:'選択区間を削除',exact:true}).click();if(await page.locator('#intervalCount').textContent()!=='2件')throw Error('delete failed');
+ await page.reload();await page.getByLabel('動画ファイルを選択',{exact:true}).setInputFiles(file);await page.waitForFunction(()=>document.getElementById('intervalCount').textContent==='2件');
+ await page.goto('about:blank');await page.goto('http://127.0.0.1:8765/video.html');await page.evaluate(()=>{for(const k of Object.keys(localStorage))if(k.startsWith('infant-video-interval-v1:'))localStorage.removeItem(k);});await page.getByLabel('動画ファイルを選択',{exact:true}).setInputFiles(file);await page.waitForFunction(()=>!document.getElementById('roiStart').disabled);
+ await page.getByLabel('作業JSONを読み込む',{exact:true}).setInputFiles(jsonPath);await page.waitForFunction(()=>document.getElementById('intervalCount').textContent==='3件');
+ await page.getByRole('combobox',{name:'拡大',exact:true}).selectOption('2');
+ await seek(0);await page.getByRole('button',{name:'▶ 再生',exact:true}).click();await page.waitForFunction(()=>document.getElementById('video').currentTime>.25);await page.getByRole('button',{name:'Ⅱ 停止',exact:true}).click();
+ await page.screenshot({path:root+'/output/playwright/video-interval-smoke.png',fullPage:true});
+ if(errors.length)throw Error(errors.join(';'));
+ console.log('PASS: video load/play/seek, ROI, I/O+labels, timeline drag+resize, overlap/uncertain guard, seconds ratio, delete, JSON/CSV, restore/import, zoom; page errors=0');
+ await page.goto('about:blank');await page.goto('http://127.0.0.1:8765/video.html');await page.evaluate(()=>{for(const k of Object.keys(localStorage))if(k.startsWith('infant-video-interval-v1:'))localStorage.removeItem(k);});
+}
+)(page);
+```
+### Events
+- Downloading file video-annotation-2026-11-02T01-41-36-287Z.json ...
+- Downloaded file video-annotation-2026-11-02T01-41-36-287Z.json to ".playwright-cli/video-annotation-2026-11-02T01-41-36-287Z.json"
+- Downloading file video-annotation-2026-11-02T01-41-36-370Z.csv ...
+- Downloaded file video-annotation-2026-11-02T01-41-36-370Z.csv to ".playwright-cli/video-annotation-2026-11-02T01-41-36-370Z.csv"

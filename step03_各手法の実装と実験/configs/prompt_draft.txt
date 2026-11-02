@@ -1,0 +1,6 @@
+Draft v0.1. For development patients only. Not frozen for final evaluation.
+
+画像内に、乳児以外の成人の手または腕が見えますか。
+成人の手または腕の一部でも明瞭に見える場合はpresent、見えない場合はabsent、映像から判別できない場合はuncertainとしてください。
+接触の有無や職種は推測しないでください。
+回答はpresent、absent、uncertainのいずれか1語だけにしてください。
