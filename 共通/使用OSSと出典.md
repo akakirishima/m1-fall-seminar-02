@@ -11,6 +11,8 @@
 
 外部の文書やコードの転載はしていない。
 AGENTS.mdと管理文書は、この研究向けに新しく記述した。
+AI向けの状態JSON、実験索引、固定項目の検査コードも本研究用に作成した。
+`research_tools/ai_records.py`はPython標準ライブラリだけを使い、新たな外部パッケージは導入していない。
 
 ## 今回の研究運用に取り入れた公開物
 
@@ -69,6 +71,21 @@ Qwen3-VL用のコードがあることだけで、Qwen3.5の学習にも同じ�
 | [Orchestra-Research/AI-Research-SKILLs](https://github.com/Orchestra-Research/AI-Research-SKILLs) | 学習と評価の実装手順の候補集。MITメタデータを確認。本体と個別SKILLは未導入 |
 
 ## 出典確認と再確認
+
+### 批判的検討と反証実験の支援候補（2026年10月30日追記）
+
+以下は調査のみで、採用・導入・動作確認は未決または未実施。
+
+| 公開物 | 用途とライセンス | 調査時コミット |
+|---|---|---|
+| K-Dense-AI/scientific-agent-skillsのscientific-critical-thinkingとhypothesis-generation | 根拠・交絡の点検、代替説明と識別予測、確認実験の計画。MIT原文確認 | `5f2bc0341354fd5590aef76a533ada1e1e5b4e62` |
+| bigspinai/reliable-agentic-scienceのadversarial-protocol-review | 効果がないのに差が出る経路、効果があっても差が消える経路を点検。skillsはMIT、postsはCC BY 4.0 | `711ab047c963957cd8aede3a50b830c613297bb4` |
+| snap-stanford/POPPER | 仮説から検定を設計・実行する公開研究コード。setup.pyはMIT表記だがAPI情報なし。LICENSE原文確認が残る | `59611864e09dd15d7528e240ad87c7ddbb4a701c` |
+
+公式本文、ライセンスへのリンク、選定理由と確認案は[調査メモ](../調査/批判的検討と反証実験を支えるOSS_20261030.md)、メタデータは[追加の出典確認](../step01_文献調査と実験設計/runs/20261030_critical_review_sources_01/実行結果.md)に記録。
+既存の採用方針を変更する決定ではない。
+
+### 初回の出典確認
 
 公式GitHub APIのリポジトリ情報とコミット情報、Hugging Face公式APIのモデル情報を取得した。
 確認した全SHA、URL、ライセンスのメタデータ、取得時刻は[出典確認JSON](../step01_文献調査と実験設計/runs/20261030_oss_sources_01/sources.json)に保存した。

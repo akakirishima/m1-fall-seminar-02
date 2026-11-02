@@ -1,0 +1,25 @@
+{
+  "note": "Copied and fingerprinted after execution; model experiments not run",
+  "files": [
+    {
+      "source": "research_tools\\ai_records.py",
+      "snapshot": "code_snapshot/ai_records.py",
+      "sha256": "8953b05761ab765fa192125b1e46b315490efadee217d35e9f803b553a12e023"
+    },
+    {
+      "source": "research_tools\\test_ai_records.py",
+      "snapshot": "code_snapshot/test_ai_records.py",
+      "sha256": "6461009f142aa4f029d10c0794363cf39a6b4d873c98104eed4932242d0eed75"
+    },
+    {
+      "source": "step01_文献調査と実験設計\\scripts\\verify_project_structure.py",
+      "snapshot": "code_snapshot/verify_project_structure.py",
+      "sha256": "245d10d4c78c8a1b89e645dc2107452d8823c35226df0734b1174d7066f81fed"
+    },
+    {
+      "source": "verification.json",
+      "snapshot": null,
+      "sha256": "f445aef9c9c845a09a7adaa8d6eded041ece5b126a7bff4b23e6b48c98589c46"
+    }
+  ]
+}

@@ -36,6 +36,8 @@ def request_json(url):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--repository", action="append", help="Check only these repositories (repeatable).")
+    parser.add_argument("--skip-models", action="store_true", help="Do not query model metadata.")
     args = parser.parse_args()
     if args.output.exists():
         parser.error("Output already exists; choose a new run directory.")
@@ -47,7 +49,7 @@ def main():
         "models": [],
         "errors": [],
     }
-    for name in REPOSITORIES:
+    for name in args.repository or REPOSITORIES:
         api_url = "https://api.github.com/repos/" + name
         try:
             metadata = request_json(api_url)
@@ -68,7 +70,7 @@ def main():
         except (HTTPError, URLError, KeyError, ValueError) as exc:
             record["errors"].append({"source": name, "error": str(exc)})
             print("FAILED repository", name, str(exc))
-    for name in MODELS:
+    for name in ([] if args.skip_models else MODELS):
         api_url = "https://huggingface.co/api/models/" + name
         try:
             metadata = request_json(api_url)

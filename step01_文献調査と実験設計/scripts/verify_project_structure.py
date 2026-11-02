@@ -20,6 +20,7 @@ DOCUMENTS = [
     "README.md", "AGENTS.md", "研究全体像.md", "方針変更履歴.md",
     "共通/使用OSSと出典.md", "共通/ラベル付け規則.md", "共通/評価方法.md",
     "共通/実験記録の運用.md", "共通/データ一覧と分割/README.md",
+    "共通/AI向け記録形式.md",
     "templates/日報テンプレート.md", "templates/実行結果テンプレート.md",
     "日報/2026-10-30.md",
     "step01_文献調査と実験設計/README.md",

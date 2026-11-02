@@ -36,11 +36,17 @@ dist/
 *.safetensors
 *.gguf
 /data/raw/
+/data/processed/
+/data/annotations/
+/local_data/
 /datasets/
 /models/
+**/runs/**/artifacts/
+**/runs/**/inputs.private.json
+**/runs/**/outputs.private.json
 
 # Reference presentations contain embedded videos; retain locally
-/スライド/references/*.pptx
+/スライド/references/**/*.pptx
 
 # Local patient metadata, annotations, and tool project files
 /data/local/
