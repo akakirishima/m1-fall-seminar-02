@@ -79,6 +79,65 @@
 .seminar .flow-arrow { font-size:36px; color:#666; flex:0 0 32px; text-align:center; }
 .seminar .flow-bridge { text-align:left; font-size:30px; margin:0 10px; line-height:1.2; }
 .seminar .flow-output { text-align:center; border:2px solid #666; background:#f2f2f2; border-radius:40px; width:600px; margin:28px auto 0; padding:14px 20px; font-size:30px; }
+.seminar.proposed-method .lead { margin-bottom:16px; }
+.seminar.proposed-method .flow-row { margin:10px 0; }
+.seminar.proposed-method .flow-node { display:flex; align-items:center; justify-content:center; min-height:92px; padding:10px; }
+.seminar.proposed-method .flow-bridge { margin:0; padding-right:170px; text-align:right; font-size:32px; color:#666; }
+.seminar.proposed-method .method-parts { margin-top:24px; }
+.seminar.proposed-method .method-parts td { padding:13px 14px; font-size:28px; line-height:1.4; }
+.seminar.proposed-method .method-parts td:first-child { width:27%; }
+.seminar.proposed-method .method-parts td:last-child { text-align:left; }
+.seminar.proposed-method .note { margin-top:18px; }
+.seminar.vlm-intro .lead { margin-bottom:16px; }
+.seminar.vlm-intro .flow-row { margin:0 0 26px; gap:8px; }
+.seminar.vlm-intro .flow-node { display:flex; align-items:center; justify-content:center; min-height:132px; padding:8px; font-size:27px; line-height:1.35; }
+.seminar.vlm-intro .flow-node.question { flex:1.9; }
+.seminar.vlm-intro .flow-node.focus { flex:.7; font-size:32px; }
+.seminar.vlm-intro .flow-arrow { flex:0 0 30px; }
+.seminar.vlm-intro .vlm-compare th, .seminar.vlm-intro .vlm-compare td { padding:10px 12px; font-size:27px; line-height:1.35; }
+.seminar.vlm-intro .vlm-compare th:first-child { width:22%; }
+.seminar.method-detail .lead { margin-bottom:22px; }
+.seminar.method-detail .flow-row { margin:0 0 24px; }
+.seminar.method-detail .flow-node { display:flex; align-items:center; justify-content:center; min-height:88px; padding:8px; }
+.seminar.method-detail .detail-table td { padding:13px 14px; font-size:28px; line-height:1.4; }
+.seminar.method-detail .detail-table th { padding:11px 14px; font-size:28px; }
+.seminar.method-detail .detail-table td:first-child { width:26%; }
+.seminar.method-detail .detail-table td:not(:first-child) { text-align:left; }
+.seminar.method-detail .compare-table td:first-child { width:20%; }
+.seminar.method-detail .note { margin-top:18px; }
+.seminar.vlm-selection .lead { margin-bottom:14px; font-size:34px; }
+.seminar.vlm-selection .criteria-row { display:flex; gap:14px; margin-bottom:16px; }
+.seminar.vlm-selection .criteria-row .flow-node { display:flex; align-items:center; justify-content:center; padding:8px; font-size:26px; line-height:1.3; }
+.seminar.vlm-selection .selection-table th, .seminar.vlm-selection .selection-table td { padding:7px 10px; font-size:26px; line-height:1.3; }
+.seminar.vlm-selection .selection-table th:nth-child(1) { width:33%; }
+.seminar.vlm-selection .selection-table th:nth-child(2) { width:15%; }
+.seminar.vlm-selection .selection-table th:nth-child(3) { width:12%; }
+.seminar.vlm-selection .selection-table td:first-child, .seminar.vlm-selection .selection-table td:last-child { text-align:left; }
+.seminar.vlm-selection .selection-table tr.picked td { background:var(--focus-fill); }
+.seminar.vlm-selection .note { margin-top:10px; font-size:25px; }
+.seminar.method-dense .lead { margin-bottom:12px; font-size:33px; }
+.seminar.method-dense .flow-row { margin:0 0 14px; gap:8px; }
+.seminar.method-dense .flow-node { min-height:80px; padding:6px; font-size:26px; line-height:1.3; }
+.seminar.method-dense .flow-node.focus { flex:2.1; }
+.seminar.method-dense .flow-arrow { flex:0 0 28px; font-size:30px; }
+.seminar.method-dense .detail-table td { padding:10px 12px; font-size:27px; line-height:1.3; }
+.seminar.method-dense .detail-table td:first-child { width:21%; }
+.seminar.m3-application .m3-result-table th, .seminar.m3-application .m3-result-table td { padding:7px 10px; font-size:26px; line-height:1.3; }
+.seminar.m3-application .m3-result-table th:first-child { width:40%; }
+.seminar.m3-application .m3-result-table td:first-child { text-align:left; }
+.seminar.m3-application .m3-result-table tr.picked td { background:var(--focus-fill); }
+.seminar.m3-application .m3-change-table { margin-top:24px; }
+.seminar.m3-application .m3-change-table th, .seminar.m3-application .m3-change-table td { padding:7px 10px; font-size:26px; line-height:1.3; }
+.seminar.m3-application .m3-change-table th:first-child { width:17%; }
+.seminar.m3-application .m3-change-table th:nth-child(2) { width:45%; }
+.seminar.m3-application .m3-change-table td:not(:first-child) { text-align:left; }
+.seminar.m2-lora .flow-row { margin:0 0 6px; gap:8px; }
+.seminar.m2-lora .flow-node { padding:12px 6px; font-size:27px; line-height:1.3; }
+.seminar.m2-lora .flow-arrow { flex:0 0 30px; font-size:32px; }
+.seminar.m2-lora .note { margin:6px 0 16px; font-size:27px; }
+.seminar.m2-lora .route-table th, .seminar.m2-lora .route-table td { padding:11px 12px; font-size:28px; line-height:1.3; }
+.seminar.m2-lora .route-table th:first-child { width:22%; }
+.seminar.m2-lora .route-table td:not(:first-child) { text-align:left; }
 .seminar .overview-diagram { width:100%; height:560px; margin-top:8px; overflow:visible; }
 .seminar .interval-diagram { width:100%; height:auto; margin-top:20px; }
 .seminar svg .diagram-node { fill:#f2f2f2; stroke:#666; stroke-width:2; }

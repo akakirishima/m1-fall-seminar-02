@@ -306,7 +306,7 @@ source: 'Souley Dosso et al., RGB-D scene analysis in the NICU, Comput. Biol. Me
 RGB-D scene analysis in the NICU. Computers in Biology and Medicine 138 (2021), 104873.
 DOI:10.1016/j.compbiomed.2021.104873、PMID:34600329。2026-11-03にPubMedの書誌と原著抄録を照合
 原著抄録は29新生児、RGB・深度、単一画像のシーン認識、VGG-16による分類と看護記録文生成を記載
-本人の英論①10・12・28・29・49枚目も参照。手や腕のラベルの細部は今回、原著全文で再確認していないため、表で同一の検出対象とは主張しない
+本人の英論①10・12・28・29・49枚目も参照。原著Table 2の陽性は看護師（または成人）の手や腕がシーンに伸びている画像（2026/11/04に全文で確認）。今回はROI内に限定するため、同一の検出対象とは主張しない
 入力・判定単位・用途の差を今回への適用上の確認点として整理した。原著が区間処理や作業時間を一切扱わないという主張ではない
 今回の比較ではM3を原著に基づくIR向け分類法として扱い、完全再現とは呼ばない
 前回正式版17ページの「先行研究の条件→自分の対象→今回の問い」という接続を参考にした
@@ -443,35 +443,48 @@ source: '採用した運用／環境別の保存と実動画での確認はこ�
 ---
 id: processing-flow
 chapter: 取り組み
-source: '少数試行で、実装と時刻の対応を確認する'
+class: proposed-method
+source: '採用した構成：研究方針v1.9（2026/11/02）／実装と実行はこれから'
 ---
 
-# 今回の処理の流れ
+# 提案手法：区間指定支援の流れ
 
 ::content::
 
-<p>モデルの判定を、動画上で人が修正できる区間へ変換する</p>
+<p class="lead">モデルの判定から区間候補を作り、<strong>人が確認修正して確定</strong>する</p>
 
 <div class="flow-row">
-  <div class="flow-node">固定ROIの照合</div><span class="flow-arrow">→</span>
-  <div class="flow-node">時刻付き画像の抽出</div><span class="flow-arrow">→</span>
-  <div class="flow-node">モデルによる判定</div>
+  <div class="flow-node">① 固定ROIの照合</div><span class="flow-arrow">→</span>
+  <div class="flow-node">② 時刻付き<br>画像の抽出</div><span class="flow-arrow">→</span>
+  <div class="flow-node focus">③ モデルによる判定</div>
 </div>
-<div class="flow-bridge">時刻付き予測を保存して、下段へ ↓</div>
+<div class="flow-bridge">↓</div>
 <div class="flow-row">
-  <div class="flow-node">人が確認修正</div><span class="flow-arrow">←</span>
-  <div class="flow-node focus">区間候補へ変換</div><span class="flow-arrow">←</span>
-  <div class="flow-node">時刻付き予測</div>
+  <div class="flow-node">確定した区間を保存</div><span class="flow-arrow">←</span>
+  <div class="flow-node">⑤ 人が確認修正</div><span class="flow-arrow">←</span>
+  <div class="flow-node">④ 区間候補へ変換</div>
 </div>
-<div class="flow-output">確定した区間を保存する</div>
 
-<p class="note">画像の判定、区間化、人の修正を分けて記録する</p>
+<table class="wide-first method-parts">
+  <tbody>
+    <tr><td><strong>入れ替える部分</strong></td><td><strong>③の判定</strong>：学習なしVLM、学習ありVLM、<br>論文に基づく分類器</td></tr>
+    <tr><td>共通にする部分</td><td>①②④⑤：ROI、時刻、区間化、確認修正の画面</td></tr>
+  </tbody>
+</table>
+
+<p class="note">流れの構成は採用済み。実装と実行はこれから</p>
 
 ::summary::
 
-少数の連続映像で、入力から確認修正まで一周する
+判定部分だけを入れ替え、区間の確定まで比較する
 
-<!-- 処理全体は採用した構成。実装と実行済みの図ではない。推論と区間化は別実行として原予測を保持する -->
+<!--
+提案手法は①〜⑤の処理全体を指し、③の判定部分を比較する。この呼び方は2026/11/04に本人が採用した説明上の整理で、研究方針の変更ではない
+共通条件の根拠：研究全体の推奨構成_20261102.md「共通の処理で3手法を比較する」
+実装と実行済みの図ではない。推論と区間化は別実行として原予測を保持する
+未確定：ROIのモデルへの渡し方、抽出間隔（1fpsは試行の初期値）、基盤モデル、質問文、区間の結合条件と前後の余裕、陰性区間の確認範囲
+判定不能、推論失敗、未推論は陰性へ変換しない。負担の削減は未検証で、「減らせる」とは主張しない
+-->
 
 ---
 id: intervalization
@@ -510,7 +523,7 @@ source: 'M3の基準：Souley Dosso et al., RGB-D scene analysis in the NICU, 20
 
 ::content::
 
-<p>VLM：画像と文章を入力して回答を得るモデル</p>
+<p>提案手法の判定部分（M1〜M3）を比べ、M0を基準にする<br>VLM：画像と文章を入力して回答を得るモデル</p>
 
 <table class="method-table">
   <thead><tr><th>ID</th><th>方法</th><th>比較で確かめること</th></tr></thead>
@@ -530,7 +543,360 @@ source: 'M3の基準：Souley Dosso et al., RGB-D scene analysis in the NICU, 20
 M1/M2基盤モデルは同一環境で推論と学習の成立を確認して固定する
 M3基準：Yasmina Souley Dosso, Kim Greenwood, JoAnn Harrold, James R. Green,
 RGB-D scene analysis in the NICU, 2021, DOI:10.1016/j.compbiomed.2021.104873
-全文に基づく条件確認とIRへの変更は未完了。原著の完全再現とは呼ばない
+原著の条件は2026/11/04に全文で確認。IRへの変更は未確定で、原著の完全再現とは呼ばない
+-->
+
+---
+id: method-m0
+chapter: 取り組み
+class: method-detail
+source: '注釈ツールは合成データで操作を確認した段階／手作業の時間は未測定'
+---
+
+# M0：手作業の区間指定
+
+::content::
+
+<p class="lead">人が動画を見て、手や腕が映る区間を<strong>一から指定</strong>する</p>
+
+<div class="flow-row">
+  <div class="flow-node">映像を確認</div><span class="flow-arrow">→</span>
+  <div class="flow-node">開始と終了、<br>ラベルを指定</div><span class="flow-arrow">→</span>
+  <div class="flow-node">再確認</div>
+</div>
+
+<table class="wide-first detail-table">
+  <tbody>
+    <tr><td>使うもの</td><td>自作の区間注釈ツール（固定ROIを表示）</td></tr>
+    <tr><td>出力</td><td>あり／なし／判定不能の区間</td></tr>
+    <tr><td>役割</td><td><strong>正解の作成</strong>と<strong>作業時間の基準</strong></td></tr>
+    <tr><td>注意点</td><td>自身の正解では精度を算出しない<br>時間は未視聴の動画で測る</td></tr>
+  </tbody>
+</table>
+
+::summary::
+
+手作業は、正解の作成と作業時間の基準を担う
+
+<!--
+ツール：step02_正解データ作成/annotation-app。動画の区間入力と集計を合成データで確認した段階で、実動画の注釈は未実施
+本人のラベルをそのまま正解にした状態で、M0自身の精度は算出しない（研究全体像）
+同じ動画を直後に繰り返して時間を比べない。一人の場合は未視聴の別セットと順序を決め、慣れを制約として示す
+過去に手作業で除外した区間の記録は残っていないため、手作業の時間は新しく測る
+-->
+
+---
+id: vlm-intro
+chapter: 取り組み
+class: vlm-intro
+source: '質問文は開発用の案（v0.1）で未確定／VLMの判定性能は未測定'
+---
+
+# VLM（Vision-Language Model）とは
+
+::content::
+
+<p class="lead"><strong>画像と質問文</strong>を入力し、<strong>回答の文章</strong>を返すモデル</p>
+
+<div class="flow-row">
+  <div class="flow-node">画像</div><span class="flow-arrow">＋</span>
+  <div class="flow-node question">質問文（案）<br>成人の手または腕が<br>見えますか</div><span class="flow-arrow">→</span>
+  <div class="flow-node focus">VLM</div><span class="flow-arrow">→</span>
+  <div class="flow-node">回答<br>あり／なし／<br>判定不能</div>
+</div>
+
+<table class="wide-first vlm-compare">
+  <thead><tr><th>観点</th><th>分類器（M3）</th><th>VLM（M1、M2）</th></tr></thead>
+  <tbody>
+    <tr><td>入力</td><td>画像</td><td>画像と質問文</td></tr>
+    <tr><td>出力</td><td>学習時に決めたクラス</td><td>文章（回答の形式を指定する）</td></tr>
+    <tr><td>専用の学習</td><td>必要</td><td><strong>なしでも回答を得られる</strong><br>追加学習もできる</td></tr>
+  </tbody>
+</table>
+
+::summary::
+
+学習なしで使えれば、準備の負担を抑えられる可能性がある
+
+<!--
+VLMを使う理由の中心は、専用の学習なしで試せること。実際に判定できるかは研究室のIR映像で未確認で、優位は仮説として扱う
+質問文の案：step03_各手法の実装と実験/configs/prompt_draft.txt（v0.1）。回答はpresent、absent、uncertainの1語。接触の有無や職種は推測させない。本文は日本語で要約した
+案の質問は「画像内」を尋ねており、ROIの渡し方（クロップかマスクか）は未確定
+1画像ずつ同じ質問を渡す。複数画像や動画の入力は別の条件として扱う
+-->
+
+---
+id: vlm-selection
+chapter: 取り組み
+class: vlm-selection
+sourceVisible: true
+source: '重み容量とスコア：各モデルの公式Hugging Faceカード（2026/10/30確認）／選定案で、モデルは未実行'
+---
+
+# VLMの選定：どのモデルを使うか
+
+::content::
+
+<p class="lead">公開されたVLMの中から、<strong>3つの基準</strong>で候補を絞る</p>
+
+<div class="criteria-row">
+  <div class="flow-node">① 研究室のGPU<br>（24 GiB）で動く規模</div>
+  <div class="flow-node">② 同じモデルで<br>追加学習できる見込み</div>
+  <div class="flow-node">③ 画像理解の<br>公開スコア（参考）</div>
+</div>
+
+<table class="selection-table">
+  <thead><tr><th>候補</th><th>重み容量</th><th>スコア※</th><th>判断</th></tr></thead>
+  <tbody>
+    <tr><td>Qwen3.5-2B</td><td>約4.6 GB</td><td>71.7</td><td>軽量側の比較候補</td></tr>
+    <tr class="picked"><td><strong>Qwen3.5-4B</strong></td><td>約9.3 GB</td><td>78.3</td><td><strong>最初に試す</strong></td></tr>
+    <tr><td>Qwen3-VL-4B-Instruct</td><td>約8.9 GB</td><td>69.8</td><td>比較候補：公式の学習コードあり</td></tr>
+    <tr><td>Qwen3.5-9B</td><td>約19.3 GB</td><td>79.7</td><td>4Bの確認後に追加を検討</td></tr>
+    <tr><td>InternVL3.5-4B</td><td>約9.5 GB</td><td>－</td><td>別系列の比較が必要な場合</td></tr>
+    <tr><td>SmolVLM2-2.2B</td><td>－</td><td>－</td><td>軽量だが最初の比較に入れない</td></tr>
+    <tr><td>Qwen3.6、Qwen3.8</td><td>27B級以上</td><td>－</td><td>大きいため最初の候補にしない</td></tr>
+  </tbody>
+</table>
+
+<p class="note">※MMStar（開発元の報告値）。条件は異なり、研究室のIR映像の成績ではない</p>
+
+::summary::
+
+Qwen3.5-4Bから試し、追加学習まで動いてからモデルを固定する
+
+<!--
+選定の順序：4B級は重み以外の処理にもGPUメモリを残せるため、最初の候補にした。9B級は約19.3 GBで余裕が小さく、動作前に24 GBで確実に動くとは扱わない
+重み容量は実行に必要なGPUメモリの総量ではない。GPUはRTX 3090（24 GiB）。別のPCを使う場合は選定を見直す
+②は未確認：Qwen3.5の追加学習の経路は公開ガイドの記載を確認しただけで、このPCでは試していない。Qwen3-VLのコードがQwen3.5へそのまま使えるとは扱わない。成立しなければ候補を再検討する
+スコアは異なる報告の値を並べたもので、そろえた比較ではない。2BはThinkingの値。4Bと9Bは公式表のモード設定に依存し、Non-Thinkingで同じ点数が出る証拠にはしない。InternVLの値は調査メモに転記していないため空欄
+表に載せていない候補：Qwen3-VL-8B-Instruct（サイズ差の比較候補。重み容量は約17.5 GB）
+Qwen3.6と3.8は確認した案内が27B級以上中心で、27Bはモデル規模の目安。新しい世代という理由だけでは選ばない。SmolVLM2-2.2BはQwen優先の希望により最初の比較に入れない。空欄は調査メモに値を転記していないもの
+調査範囲：本人のQwen優先の希望と24 GiBの条件に合わせ、2Bから9B級を中心に調べた。全VLMの網羅的な比較ではなく、研究室IR映像で候補を比べた報告も確認できていない
+Qwen3.5-4BとQwen3-VL-4B-Instructの公式カードのライセンスはApache-2.0
+参照：調査/VLM候補比較と研究室PCでの選定_20261030.md、共通/使用OSSと出典.md
+-->
+
+---
+id: method-m1
+chapter: 取り組み
+class: method-detail method-dense
+sourceVisible: true
+source: 'Qwen Team, Qwen3-VL Technical Report, arXiv:2511.21631, 2025／Qwen3.5-4B公式モデルカード（2026/11/04確認）／質問文は案で未実行'
+---
+
+# M1：追加学習なしVLM
+
+::content::
+
+<p class="lead">公開モデルの<strong>重みを更新せず</strong>、質問文だけで判定する</p>
+
+<div class="flow-row">
+  <div class="flow-node">時刻付き画像<br>と質問文</div><span class="flow-arrow">→</span>
+  <div class="flow-node focus">画像エンコーダ → 言語モデル<br>（重みは固定）</div><span class="flow-arrow">→</span>
+  <div class="flow-node">回答の<br>文字列</div><span class="flow-arrow">→</span>
+  <div class="flow-node">ラベルへ<br>読み取り</div>
+</div>
+
+<table class="wide-first detail-table">
+  <tbody>
+    <tr><td>質問文（案）</td><td>成人の手または腕が見えますか<br>present、absent、uncertainの1語で回答</td></tr>
+    <tr><td>推論の設定</td><td>1画像ずつ、思考を省いた直接回答から試す</td></tr>
+    <tr><td>結果の保存</td><td>回答の原文、ラベル、状態（正常、判定不能、<br>形式違反、推論失敗）を画像ごとに残す</td></tr>
+    <tr><td>必要な準備</td><td>調整用の患者で、質問文と推論条件を選ぶ</td></tr>
+    <tr><td>測るもの</td><td>判定の成績、1画像の時間、最大GPUメモリ</td></tr>
+  </tbody>
+</table>
+
+::summary::
+
+専用の学習なしで、どこまで判定できるかを確かめる
+
+<!--
+構成：Qwen3-VLは画像エンコーダ（SigLIP-2）、MLPのマージャ、言語モデルからなる（技術報告2章）。Qwen3.5-4Bもカードでは画像エンコーダを持つ言語モデルと説明されている。図は両候補に共通する説明
+候補の順序は前のページ。主比較のモデルは推論と追加学習の両方が同じ環境で成立してから固定する
+直接回答：Qwen3.5はカードに enable_thinking を False にする例がある。Thinkingを加える場合は別の条件として記録する。Qwen3-VL-4B-Instructは別の設定になるため実機で確認する
+質問文：step03_各手法の実装と実験/configs/prompt_draft.txt（v0.1）。接触の有無や職種は推測させない。原文は日本語で「画像内に」を尋ねており、ROIの渡し方（クロップかマスクか）は未確定
+判定不能、形式違反、推論失敗は陰性へ変換しない。正常回答だけの成績を全対象の成績と混同しない
+手順：環境の保存、一般画像1枚での読込と直接回答の確認、開発患者の少数画像での推論（P05）。いずれも未実施。速度、メモリ、判定精度は未測定
+最終評価の患者では質問文を調整しない。M1の「学習なし」は重みを更新しない意味で、質問の選定に使ったラベルの作業量は報告する
+-->
+
+---
+id: method-m2
+chapter: 取り組み
+class: method-detail method-dense
+source: '計画：研究計画_詳細、評価条件固定票／追加学習は未実施'
+---
+
+# M2：追加学習ありVLM
+
+::content::
+
+<p class="lead">M1と同じモデルを、研究室映像のラベルで<strong>追加学習</strong>する</p>
+
+<div class="flow-row">
+  <div class="flow-node">共通の<br>区間ラベル</div><span class="flow-arrow">→</span>
+  <div class="flow-node">学習データ<br>を生成</div><span class="flow-arrow">→</span>
+  <div class="flow-node focus">LoRAで<br>追加学習</div><span class="flow-arrow">→</span>
+  <div class="flow-node">M1と同じ<br>条件で推論</div>
+</div>
+
+<table class="wide-first detail-table">
+  <tbody>
+    <tr><td>学習データ</td><td>画像、質問文、正解の1語を組にする</td></tr>
+    <tr><td>そろえる条件</td><td>基盤モデルと版、質問文、解像度、推論条件、区間化</td></tr>
+    <tr><td>学習と選択</td><td>学習用の患者で更新し、調整用の患者で重みを選ぶ</td></tr>
+    <tr><td>M3との関係</td><td>同じ患者、動画、ラベル、抽出対象で学習する</td></tr>
+    <tr><td>クラスの偏り</td><td>元の比率と1：1の2条件を候補に、調整用で比べる</td></tr>
+    <tr><td>最初の確認</td><td>少数データで更新、保存、再読込、同条件での推論</td></tr>
+  </tbody>
+</table>
+
+::summary::
+
+M1との差から、追加学習の効果を確かめる
+
+<!--
+質問をM2だけ変えない。共通質問の見直しが必要ならP08へ戻り、M1とM2を両方測り直す
+異なる基盤モデルのM1とM2を学習前後として比較しない
+1：1は候補で、最適と断定しない。学習側だけで調整し、評価データの自然な比率は保つ。参照：step02_正解データ作成/区間注釈とクラス比率.md
+M1より良くなることは完了条件に含めず、悪化や判定不能も保存する。改善しなかった場合に「学習が足りない」で終えず、対象の曖昧さ、抽出、入力、実装、画像条件を調べる
+少数画像の暗記や損失の低下を、未知の患者への精度の証拠にしない
+参照：step03_各手法の実装と実験/M2_追加学習Qwen/README.md、環境確認と少数実験.md
+-->
+
+---
+id: method-m2-lora
+chapter: 取り組み
+class: m2-lora
+sourceVisible: true
+source: 'LoRA：Hu et al., arXiv:2106.09685, 2021／Unsloth学習ガイド、Qwen3-VL公式README（2026/11/04確認）'
+---
+
+# M2：LoRAと学習の経路
+
+::content::
+
+<div class="flow-row">
+  <div class="flow-node">元の重み <strong>W</strong><br>（固定）</div><span class="flow-arrow">＋</span>
+  <div class="flow-node focus">小さな行列の積 <strong>BA</strong><br>（ここだけ学習）</div><span class="flow-arrow">→</span>
+  <div class="flow-node">推論に使う重み<br><strong>W＋BA</strong></div>
+</div>
+
+<p class="note">全層を更新する学習より、更新する数と必要なメモリを減らせる</p>
+
+<table class="route-table">
+  <thead><tr><th>観点</th><th>Qwen3.5-4B</th><th>Qwen3-VL-4B-Instruct</th></tr></thead>
+  <tbody>
+    <tr><td>学習の資料</td><td>Unslothのガイド</td><td>開発元の公式コード</td></tr>
+    <tr><td>学習の形式</td><td>BF16のLoRAを推奨<br>4-bit QLoRAは非推奨</td><td>LoRAの設定あり</td></tr>
+    <tr><td>更新対象</td><td>画像側と言語側を切替</td><td>画像、MLP、言語を切替</td></tr>
+    <tr><td>メモリの目安</td><td>約10 GB（資料の記載）</td><td>資料からは未確認</td></tr>
+  </tbody>
+</table>
+
+::summary::
+
+同じモデルで推論と追加学習が動く経路を、先に確かめる
+
+<!--
+LoRA原典：Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen. arXiv:2106.09685, 2021。事前学習の重みを固定し、低ランクの行列を学習する。原典の報告（GPT-3 175Bで学習パラメータ約1万分の1、GPUメモリ約3分の1）は言語モデルの結果で、今回のVLMの値ではない
+Unslothガイド：Transformers v5が必要。ガイドの例は r=16、lora_alpha=16、全線形層。推論は学習時と同じチャットテンプレートを使う。9Bは約22 GBと記載されており、24 GiBのGPUでは余裕が小さい
+公式README：会話形式のJSONで画像を指定する。lora_enable、lora_r、lora_alpha の設定があり、例は r=8、lora_alpha=16。tune_mm_vision、tune_mm_mlp、tune_mm_llm で更新対象を切り替える
+どの設定も資料の例で、今回の採用条件ではない。資料の値は実測ではなく、研究室PCでは未確認。どの部分を更新するかは未決
+Qwen3-VLのコードがQwen3.5へそのまま使えるとは扱わない。Qwen3.5の組が成立しなければQwen3-VL-4B-Instructを次の候補にし、変更履歴へ残す
+Windowsネイティブ、WSL2、Linuxのどれで動かすかは依存関係の確認後に決める
+-->
+
+---
+id: method-m3
+chapter: 取り組み
+class: method-detail method-dense
+sourceVisible: true
+source: 'Souley Dosso et al., RGB-D scene analysis in the NICU, Comput. Biol. Med. 138, 2021, doi:10.1016/j.compbiomed.2021.104873'
+---
+
+# M3：基準論文の介入分類
+
+::content::
+
+<p class="lead"><strong>成人の手や腕が映っているか</strong>を、VGG-16で画像ごとに分類する</p>
+
+<div class="flow-row">
+  <div class="flow-node">RGB画像と<br>Depth画像</div><span class="flow-arrow">→</span>
+  <div class="flow-node">4チャンネルに<br>結合</div><span class="flow-arrow">→</span>
+  <div class="flow-node focus">VGG-16<br>畳み込み13層、全結合3層</div><span class="flow-arrow">→</span>
+  <div class="flow-node">介入あり／<br>なし</div>
+</div>
+
+<table class="wide-first detail-table">
+  <tbody>
+    <tr><td>陽性の定義</td><td>看護師（または成人）の<strong>手や腕</strong>がシーンに伸びている</td></tr>
+    <tr><td>データ</td><td>27人、14,892枚（介入1,260枚、なし13,632枚）<br>30秒に1枚を抽出</td></tr>
+    <tr><td>学習</td><td>事前学習の重みから全層を更新<br>SGD、学習率1e-5、バッチ32、最大20エポック</td></tr>
+    <tr><td>偏りへの対策</td><td>少ない介入クラスを重み付き交差エントロピーで強調</td></tr>
+    <tr><td>評価</td><td>患者が重ならない5分割交差検証</td></tr>
+  </tbody>
+</table>
+
+::summary::
+
+対象の定義が近く、学習条件も明記された比較の基準
+
+<!--
+原著全文で確認（2026/11/04）。論文の3.2節、3.6節、Table 2
+VGG-16はImageNet事前学習（事前学習の記載は2024年のHajj-Aliらの2.3節でも確認）。fine-tuningは全層の重みを更新する
+追加の条件：SGDのmomentum 0.9。学習パラメータは4患者の部分集合で調整。拡張はX軸Y軸の反転と0〜360度の回転で、平行移動と拡大縮小は対象を失うため行わない
+論文全体は5つの文脈を分類して看護記録の文を生成する研究で、ここで使うのは介入分類の部分だけ
+RGBD4は第4チャンネルの重みに、入力層の赤チャンネルの重みをコピーする。介入分類ではRGBD4が最良のRGB-D融合だった
+画像全体の評価で、胴体が手と患者を隠す複雑な場面はデータから除外している
+本研究のROI内という定義とは同一ではない
+-->
+
+---
+id: method-m3-application
+chapter: 取り組み
+class: m3-application
+sourceVisible: true
+source: '報告値：Souley Dosso et al., 2021, Table 4（研究室映像の結果ではない）／今回の条件は未確定で未実施'
+---
+
+# M3：論文の結果と今回の適用
+
+::content::
+
+<table class="m3-result-table">
+  <thead><tr><th>論文の報告値（%）</th><th>再現率</th><th>適合率</th><th>F1</th><th>MCC</th></tr></thead>
+  <tbody>
+    <tr><td>肌色検出（基準法）</td><td>18.20</td><td>59.01</td><td>16.63</td><td>20.52</td></tr>
+    <tr><td>RGB</td><td>83.44</td><td>64.55</td><td>72.79</td><td>70.63</td></tr>
+    <tr><td>Depthのみ</td><td>66.11</td><td>36.24</td><td>46.82</td><td>42.64</td></tr>
+    <tr class="picked"><td><strong>RGB-D（4チャンネル）</strong></td><td>84.25</td><td>64.54</td><td><strong>73.06</strong></td><td><strong>70.98</strong></td></tr>
+  </tbody>
+</table>
+
+<table class="m3-change-table">
+  <thead><tr><th>観点</th><th>論文</th><th>今回</th></tr></thead>
+  <tbody>
+    <tr><td>入力</td><td>RGB-D（近赤外は分析に使わず）</td><td><strong>IR映像のみ</strong></td></tr>
+    <tr><td>入力層</td><td>Depthのみでは1チャンネルへ変更</td><td>同じ変更を候補に検討</td></tr>
+    <tr><td>範囲</td><td>画像全体</td><td>固定ROI内</td></tr>
+    <tr><td>抽出間隔</td><td>30秒に1枚</td><td>試行で決める（1秒から）</td></tr>
+  </tbody>
+</table>
+
+::summary::
+
+報告値はIRへそのまま当てはまらないため、同じ評価データで測る
+
+<!--
+±はRGB 83.44±0.07、RGB-D 84.25±1.03など。原著Table 4を参照。MCCはクラスの偏りに強い指標で、適合率が低いのは介入が少ないことも影響する
+読み方：RGBとRGB-Dの差は小さく、Depthのみは大きく下がる。IRは色も深度も持たないので、どの行の値も期待値にはならない
+著者の考察：手袋を含むデータで、肌の色ではなく手の形と文脈を学習したと述べている。色のないIRでも使える可能性を示すが、検証はされていない
+介入の約98%は明るい環境で起きていた。低照度は少なく、IRの暗所映像に近い条件の評価は限られる
+論文のDepthモデルは入力層の重みを1チャンネルだけ残している。IRへの適用はこの方法を候補とするが、3チャンネルへの複製など他の案と合わせて未決
+1fpsは試行の初期値で本採用ではない。ROIの渡し方も未確定
+論文の報告値と研究室映像の実測は比較しない。実装、学習、性能測定は未実施
 -->
 
 ---
