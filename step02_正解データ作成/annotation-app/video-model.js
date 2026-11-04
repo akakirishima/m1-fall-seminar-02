@@ -51,9 +51,16 @@ function validateProject(s,source) {
  return s;
 }
 // Sampling timestamps are k / fps, anchored at original video time zero.
+// A time this close to k / fps is that sample: 0.28 * 25 evaluates to 7.000000000000001, so a bare ceil skips k = 7.
+// 1 ns exceeds double rounding error on long recordings and stays far below the 8.3 ms sample spacing at the 120 fps limit.
+const GRID_TOLERANCE_S=1e-9;
+function firstSampleIndex(t,fps) {
+ const nearest=Math.round(t*fps);
+ return Math.abs(t-nearest/fps)<=GRID_TOLERANCE_S?nearest:Math.ceil(t*fps);
+}
 function frameCount(start,end,fps=1) {
  if(!Number.isFinite(fps)||fps<=0||!Number.isFinite(start)||!Number.isFinite(end)||start<0||end<start)throw Error('抽出設定または時間範囲が不正です。');
- return Math.max(0,Math.ceil(end*fps)-Math.ceil(start*fps));
+ return Math.max(0,firstSampleIndex(end,fps)-firstSampleIndex(start,fps));
 }
 function frameStats(intervals,duration,fps=1,start=0,end=duration) {
  const checked=validateIntervals(intervals,duration);

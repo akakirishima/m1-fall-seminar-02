@@ -13,4 +13,9 @@ test('Last hour may be partial',()=>assert.deepEqual(M.hourWindows(7300),[{start
 test('Exact hour has no empty final page',()=>assert.equal(M.hourWindows(7200).length,2));
 test('Invalid rate rejected',()=>{for(const f of [0,-1,NaN,Infinity])assert.throws(()=>M.frameCount(0,1,f));});
 test('Formula matches enumerated samples on fractional windows',()=>{for(let i=0;i<150;i++){const start=i*.031,end=start+.48,fps=[.5,1,2,3][i%4];let count=0;for(let k=0;k<40;k++)if(start<=k/fps&&k/fps<end)count++;assert.equal(M.frameCount(start,end,fps),count);}});
+test('Fractional boundary on the 25fps grid belongs to the right side',()=>{assert.equal(M.frameCount(.28,.32,25),1);assert.equal(M.frameCount(0,.28,25),7);assert.equal(M.frameStats([a('a',0,.28),a('b',.28,.32,'absent')],1,25).present,7);assert.equal(M.frameStats([a('a',0,.28),a('b',.28,.32,'absent')],1,25).absent,1);});
+test('Every grid boundary counts exactly one sample per step',()=>{for(const fps of [1,2,3,5,10,12,15,24,25,30,50,60,120,30000/1001,.5])for(let k=0;k<2000;k++){assert.equal(M.frameCount(k/fps,(k+1)/fps,fps),1,`fps=${fps} k=${k}`);assert.equal(M.frameCount(0,k/fps,fps),k,`fps=${fps} k=${k}`);}});
+test('Grid boundaries stay exact on a 24-hour recording',()=>{for(const fps of [25,30000/1001,120]){const k=Math.floor(86400*fps);assert.equal(M.frameCount(k/fps,(k+1)/fps,fps),1);assert.equal(M.frameCount(0,k/fps,fps),k);}});
+test('Accumulated decimal error still lands on the grid',()=>{assert.equal(M.frameCount(.1+.2,.4,10),1);assert.equal(M.frameCount(0,.1+.2,10),3);});
+test('A time clearly off the grid is not snapped',()=>{assert.equal(M.frameCount(.281,.32,25),0);assert.equal(M.frameCount(0,.281,25),8);assert.equal(M.frameCount(.279,.32,25),1);});
 console.log(n+' frame-count tests passed');
