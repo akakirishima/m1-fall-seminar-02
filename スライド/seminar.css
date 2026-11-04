@@ -1,0 +1,237 @@
+.seminar {
+  --ink: #151515;
+  --text-accent: #ed7d31;
+  --focus-fill: #fff4eb;
+  --orange: #f79646;
+  color: var(--ink);
+  background: #fff;
+  font-family: Meiryo, 'メイリオ', sans-serif;
+}
+.seminar-title { position:absolute; top:6px; left:52px; right:35px; height:58px; display:flex; align-items:center; }
+.seminar-title h1 { margin:0; padding:0; font-size:46.6667px; line-height:1.15; font-weight:700; color:#111; background:none; -webkit-text-fill-color:currentColor; }
+.seminar-rule { position:absolute; top:67px; left:35px; right:31px; height:8px; border-radius:4px; background:linear-gradient(90deg,#f27509,#ffeadc); }
+.seminar-content { position:absolute; top:111px; left:52px; right:52px; bottom:145px; font-size:30px; line-height:1.15; }
+.seminar-content p { margin:0 0 24px; font-size:30px; line-height:1.15; }
+.seminar-content h2 { font-size:33.333px; font-weight:700; line-height:1.4; margin:0 0 20px; color:#151515; }
+.seminar-content strong, .seminar-summary strong { color:var(--text-accent); font-weight:700; }
+.seminar-content ul { padding-left:1.2em; margin:0; }
+.seminar-content li { margin-bottom:24px; font-size:30px; line-height:1.2; }
+.seminar-content table { width:100%; table-layout:fixed; border-collapse:collapse; margin:10px 0 0; font-size:30px; }
+.seminar-content th { background:#d9d9d9; color:#151515; font-weight:700; text-align:center; padding:12px 18px; border:1.6667px solid #fff; line-height:1.1; }
+.seminar-content td { background:#ededed; color:#151515; vertical-align:middle; text-align:center; padding:12px 18px; border:1.6667px solid #fff; line-height:1.1; }
+.seminar-content tr:nth-child(even) td { background:#f5f5f5; }
+/* 短い見出しと項目名は中央、長い説明の列は左へそろえる。 */
+.seminar-content .wide-first td:last-child,
+.seminar-content .method-table td:last-child,
+.seminar-content .status-table td:last-child { text-align:left; }
+.seminar-footer { position:absolute; inset:0; pointer-events:none; }
+.seminar-summary { position:absolute; left:52px; right:52px; bottom:82px; min-height:66px; display:flex; justify-content:center; align-items:center; color:var(--text-accent); font-size:33.4px; line-height:1.2; font-weight:700; text-align:center; }
+.seminar-summary p { font-size:33.4px; margin:0; line-height:1.2; font-weight:700; color:var(--text-accent); }
+.seminar-source { position:absolute; left:52px; bottom:58px; right:52px; font-size:15px; color:#656565; line-height:1.3; }
+/* 本人の添付画像を基準に、下端の帯へ5章名を並べ、現在の章だけ白くする。氏名と大学名は右下へ小さく置く。 */
+.seminar-footer-band { position:absolute; left:0; right:0; bottom:0; height:37px; background:#e67214; color:#fff; font-family:Arial,sans-serif; }
+.seminar-footer-chapters { position:absolute; left:42px; top:0; bottom:0; display:flex; align-items:center; gap:30px; font-family:Meiryo,'メイリオ',sans-serif; font-size:20px; line-height:1; font-weight:700; white-space:nowrap; }
+.seminar-footer-chapters span { color:#f8b27a; }
+.seminar-footer-chapters span.current { color:#fff; }
+.seminar-footer-credit { position:absolute; right:86px; bottom:5px; display:flex; gap:7px; align-items:baseline; font-size:14px; line-height:1.2; font-weight:700; white-space:nowrap; }
+.seminar-page { position:absolute; right:0; top:0; bottom:0; width:70px; display:flex; align-items:center; justify-content:center; font-size:26px; line-height:1; font-weight:700; color:#fff; background:#984807; }
+.seminar .lead { margin:0 0 32px; font-size:36px; line-height:1.55; }
+.seminar .objective { margin:45px 0 48px; font-size:44px; line-height:1.65; font-weight:700; text-align:center; }
+.seminar .objective.secondary { font-size:40px; text-align:left; margin:34px 0 38px; }
+.seminar .statement { margin:32px 0; font-size:36px; line-height:1.6; }
+.seminar .note { font-size:30px; color:#444; margin-top:24px; }
+.seminar .row-label { color:var(--text-accent); font-weight:700; }
+.seminar .agenda { margin:0; padding-left:25px; list-style:disc; }
+.seminar .agenda li { display:list-item; font-size:40px; font-weight:700; line-height:1.2; margin:0 0 40px; }
+.seminar.reference-agenda .seminar-title h1 { font-size:53.333px; }
+.seminar .wide-first th:first-child, .seminar .wide-first td:first-child { width:35%; }
+.seminar.reference-evaluation .wide-first th:first-child, .seminar.reference-evaluation .wide-first td:first-child { width:37.1%; }
+.seminar.reference-evaluation table, .seminar.reference-evaluation th, .seminar.reference-evaluation td { font-size:26.6667px; }
+.seminar .method-table th:first-child, .seminar .method-table td:first-child { width:11%; }
+.seminar .method-table th:nth-child(2), .seminar .method-table td:nth-child(2) { width:36%; }
+.seminar .method-table td { padding-top:12px; padding-bottom:12px; }
+.seminar .three-layer td { padding-top:15px; padding-bottom:15px; }
+.seminar .two-points { display:grid; grid-template-columns:1fr 1fr; gap:50px; margin-top:35px; }
+.seminar .two-points > div { border:1.5px solid #888; padding:20px; }
+.seminar .two-points p { margin-bottom:18px; }
+.seminar.selection-problem .lead { margin-bottom:30px; }
+.seminar.selection-problem .selection-flow { margin:16px 0 36px; }
+.seminar.selection-problem .selection-flow .flow-node { flex:1; min-height:112px; display:flex; align-items:center; justify-content:center; }
+.seminar.selection-problem .selection-flow .flow-node.focus { flex:1.5; }
+.seminar.selection-problem .selection-points li { margin-bottom:28px; line-height:1.4; }
+.seminar.prior-study-gap .paper-description { margin:12px 0 32px; }
+.seminar.prior-study-gap .gap-table th:first-child { width:20%; }
+.seminar.prior-study-gap .gap-table td { padding:20px 14px; line-height:1.4; }
+.seminar.prior-study-gap .gap-table tbody th { background:#d9d9d9; font-weight:700; text-align:center; padding:20px 14px; line-height:1.4; vertical-align:middle; }
+.seminar.prior-study-gap .gap-table tbody tr:nth-child(n+2) td:last-child { text-align:left; }
+/* 比較表は「今回」の列全体を一つの枠で示し、既存の文字揃えを保つ。 */
+.seminar.prior-study-gap .gap-table-wrap { position:relative; margin-top:10px; }
+.seminar.prior-study-gap .gap-table-wrap .gap-table { margin:0; }
+.seminar.prior-study-gap .gap-table-wrap::after { content:''; position:absolute; inset:0 0 0 60%; border:4px solid var(--text-accent); box-sizing:border-box; pointer-events:none; }
+.seminar.prior-study-gap .gap-table td:last-child strong { color:var(--ink); }
+.seminar.prior-study-gap .note { margin-top:30px; }
+.seminar.problem-response .objective.secondary { margin:12px 0 32px; font-size:36px; line-height:1.55; }
+.seminar.problem-response .response-table th, .seminar.problem-response .response-table td { font-size:28px; padding:20px 14px; line-height:1.4; }
+.seminar.problem-response .response-table th:first-child { width:30%; }
+.seminar .flow-row { display:flex; align-items:center; gap:15px; margin:24px 0; }
+.seminar .flow-node { border:2px solid #666; padding:19px 12px; text-align:center; flex:1; font-size:30px; line-height:1.45; background:#f2f2f2; }
+.seminar .flow-node.focus { border:3px solid var(--text-accent); background:var(--focus-fill); color:var(--ink); font-weight:700; }
+.seminar .flow-arrow { font-size:36px; color:#666; flex:0 0 32px; text-align:center; }
+.seminar .flow-bridge { text-align:left; font-size:30px; margin:0 10px; line-height:1.2; }
+.seminar .flow-output { text-align:center; border:2px solid #666; background:#f2f2f2; border-radius:40px; width:600px; margin:28px auto 0; padding:14px 20px; font-size:30px; }
+.seminar .overview-diagram { width:100%; height:560px; margin-top:8px; overflow:visible; }
+.seminar .interval-diagram { width:100%; height:auto; margin-top:20px; }
+.seminar svg .diagram-node { fill:#f2f2f2; stroke:#666; stroke-width:2; }
+.seminar svg .diagram-node.focus { fill:var(--focus-fill); stroke:var(--text-accent); stroke-width:3; }
+.seminar svg .diagram-label.focus { font-weight:700; }
+.seminar svg .diagram-links path { fill:none; stroke:#666; stroke-width:2; }
+.seminar svg .diagram-label { font-size:30px; fill:#151515; font-family:Meiryo,'メイリオ',sans-serif; }
+.seminar svg .diagram-callout { font-size:30px; fill:var(--text-accent); font-weight:700; }
+.seminar svg .diagram-note { font-size:30px; fill:#555; }
+.seminar svg .connector-label { font-size:27px; fill:#151515; }
+.seminar .support-compare { margin-top:20px; }
+.seminar .support-row { display:grid; grid-template-columns:210px 1fr; gap:32px; align-items:center; border-bottom:2px solid #ddd; padding:28px 0; }
+.seminar .support-row .label { color:var(--text-accent); font-weight:700; text-align:center; }
+.seminar .support-row .steps { font-size:32px; line-height:1.6; text-align:left; }
+.seminar .status-table th:first-child, .seminar .status-table td:first-child { width:24%; font-weight:700; }
+.seminar .status-table td { padding-top:15px; padding-bottom:15px; }
+.seminar .recap { margin-top:28px; }
+.seminar .recap p { margin-bottom:32px; font-size:34px; }
+/* 中間発表の表紙に合わせ、氏名・ロゴ・所属を下部中央へまとめる。 */
+.seminar-cover-title { position:absolute; left:75px; right:58px; top:302px; }
+.seminar-cover-title h1 { color:#111; font-size:48px; line-height:1.2; font-weight:700; margin:0; background:none; -webkit-text-fill-color:currentColor; }
+.seminar-cover-english { position:absolute; left:75px; right:70px; top:432px; font-size:24px; line-height:1.3; color:#222; }
+.seminar-cover-rule { position:absolute; top:510px; left:35px; right:12px; height:5px; border-radius:3px; background:var(--text-accent); }
+.seminar-cover-advisor { position:absolute; top:540px; left:75px; right:70px; font-size:23px; font-weight:700; line-height:1.4; }
+.seminar-cover-bottom { position:absolute; left:50%; transform:translateX(-50%); bottom:78px; width:max-content; max-width:1050px; height:82px; display:grid; grid-template-columns:max-content max-content max-content; column-gap:40px; align-items:center; }
+.seminar-cover-author { font-size:32px; line-height:1.2; color:#444; font-weight:700; text-align:center; white-space:nowrap; }
+.seminar-cover-author span { display:block; margin:0; font-size:20px; font-weight:400; }
+.seminar-cover-logo { height:78px; border-left:1px solid #bdbdbd; display:flex; align-items:center; padding-left:32px; }
+.seminar-cover-logo img { width:205px; height:auto; object-fit:contain; }
+.seminar-cover-affiliation { align-self:center; font-size:17px; line-height:1.55; color:#555; white-space:nowrap; }
+
+/* 前回7枚目の文字、画像、被覆、配置を引き継ぐ目的ページ */
+.reference-purpose-content { position:absolute; inset:0; }
+.reference-purpose-main { position:absolute; left:52px; top:163px; width:1096px; font-size:40px; line-height:1.2; font-weight:700; text-align:center; }
+.reference-purpose-content strong { color:var(--text-accent); font-weight:700; }
+.reference-purpose-heading { position:absolute; top:393px; font-size:33.333px; line-height:1.2; font-weight:700; }
+.advantage-heading { left:52px; }
+.benefits-heading { left:690px; }
+.reference-purpose-panel { position:absolute; top:440px; height:395px; background:#ededed; }
+.advantage-panel { left:52px; width:624px; }
+.benefits-panel { left:690px; width:458px; }
+.reference-picture { position:absolute; overflow:hidden; }
+.reference-picture img { position:absolute; max-width:none !important; max-height:none !important; object-fit:fill; }
+.reference-purpose-caption { position:absolute; top:664px; font-size:30px; line-height:1.2; font-weight:700; text-align:center; }
+.grayscale-caption { left:55.9px; width:258.8px; }
+.clinical-caption { left:320.2px; width:354.3px; }
+.reference-purpose-benefit { position:absolute; left:789.7px; font-size:30px; line-height:1.2; font-weight:700; }
+.benefit-monitoring { top:495.3px; }
+.benefit-workload { top:618.7px; }
+.benefit-diagnosis { top:742px; }
+
+/* 付録：前回正式版の付録を今回の書式（強調はオレンジ、図表は灰色）で再構成 */
+.seminar.appendix .seminar-summary { bottom:100px; }
+.seminar.appendix .appendix-lead { margin:0 0 18px; font-size:30px; }
+.seminar.appendix .appendix-body { margin:0 0 14px; font-size:28px; line-height:1.4; }
+.seminar.appendix .appendix-small { margin:16px 0 0; font-size:24px; line-height:1.4; color:#444; }
+.seminar.appendix .appendix-center { margin:18px 0 0; text-align:center; font-size:28px; }
+.seminar.appendix .appendix-heading { margin:0 0 16px; font-size:30px; line-height:1.35; font-weight:700; }
+.seminar.appendix .appendix-heading span { display:block; font-size:22px; font-weight:400; color:#555; margin-top:4px; padding-left:440px; }
+.seminar.appendix .appendix-heading.accent, .seminar.appendix .point-label { color:var(--text-accent); font-weight:700; }
+.seminar.appendix .point-label { margin:14px 0 2px; font-size:30px; }
+.seminar.appendix .appendix-two { display:grid; grid-template-columns:400px 1fr; gap:46px; align-items:center; }
+.seminar.appendix figure { margin:0; text-align:center; }
+.seminar.appendix figcaption { font-size:24px; color:#444; margin-top:4px; white-space:nowrap; }
+.seminar.appendix .appendix-figure img { width:400px; height:340px; object-fit:cover; }
+.seminar.appendix .gms-points h2 { margin:0 0 4px; }
+.seminar.appendix .gms-points p { margin:0; font-size:28px; }
+.seminar.appendix .gms-points .point-label { margin-top:22px; }
+.seminar.appendix .gms-timeline { width:100%; height:110px; margin-bottom:14px; }
+.seminar.appendix .gms-timeline text { font-size:24px; font-weight:400; text-anchor:middle; }
+.seminar.appendix .gms-timeline text.start { text-anchor:start; }
+.seminar.appendix .gms-timeline .axis { stroke:#444; stroke-width:2; fill:none; }
+.seminar.appendix .gms-timeline .phase { fill:#f2f2f2; stroke:#888; stroke-width:1.5; }
+.seminar.appendix .gms-timeline .phase.transition { fill:#dcdcdc; }
+.seminar.appendix .gms-timeline .phase-label { font-weight:700; fill:var(--text-accent); font-size:28px; }
+.seminar.appendix .gms-timeline .phase-label.minor { fill:#444; font-weight:400; font-size:24px; }
+.seminar.appendix .gms-stages { display:grid; grid-template-columns:1fr 1fr; gap:30px; }
+.seminar.appendix .gms-stage { display:grid; grid-template-columns:220px 1fr; gap:14px; align-items:center; }
+.seminar.appendix .gms-stage img { width:220px; height:230px; object-fit:cover; }
+.seminar.appendix .gms-stage p { margin:0 0 6px; font-size:26px; line-height:1.3; }
+.seminar.appendix .gms-stage .point-label { margin:0 0 10px; font-size:28px; }
+.seminar.appendix .gma-steps { display:grid; grid-template-columns:1fr 70px 1fr; align-items:center; margin-bottom:30px; }
+.seminar.appendix .gma-steps img { width:330px; height:300px; object-fit:cover; }
+.seminar.appendix .gma-steps figcaption { color:var(--text-accent); font-weight:700; font-size:28px; }
+.seminar.appendix .gma-steps .flow-arrow { font-size:44px; }
+.seminar.appendix .gma-patterns { display:grid; grid-template-columns:400px 180px 1fr; align-items:center; column-gap:20px; margin-bottom:16px; }
+.seminar.appendix .gma-patterns > * { border-bottom:1.5px solid #ddd; padding:9px 0; font-size:26px; }
+.seminar.appendix .gma-patterns .pattern-name { color:var(--text-accent); font-weight:700; font-size:28px; }
+.seminar.appendix .gma-patterns svg { width:180px; height:50px; box-sizing:content-box; }
+.seminar.appendix .gma-patterns svg path { fill:none; stroke:#666; stroke-width:3; stroke-linecap:round; }
+.seminar.appendix .gma-patterns svg path.second { stroke:#aaa; }
+.seminar.appendix .appendix-callout { border:3px solid var(--text-accent); padding:12px 20px; font-size:28px; line-height:1.35; margin:0 0 12px; }
+.seminar.appendix .oks-row { display:grid; grid-template-columns:380px 1fr; gap:30px; align-items:center; margin-bottom:12px; }
+.seminar.appendix .oks-figure { width:380px; height:250px; }
+.seminar.appendix svg text { font-size:22px; font-weight:700; fill:#151515; font-family:Meiryo,'メイリオ',sans-serif; }
+.seminar.appendix svg .axis { stroke:#666; stroke-width:2; fill:none; }
+.seminar.appendix svg .axis-label { font-size:18px; fill:#444; }
+.seminar.appendix svg .legend { font-size:20px; }
+.seminar.appendix svg .legend.center { text-anchor:middle; }
+.seminar.appendix .oks-figure .truth { stroke:#555; stroke-width:4; fill:none; }
+.seminar.appendix .oks-figure .pred { stroke:var(--text-accent); stroke-width:4; fill:none; }
+.seminar.appendix .oks-figure .dist { stroke:#999; stroke-width:2; stroke-dasharray:6 4; fill:none; }
+.seminar.appendix .truth-dot { fill:#555; }
+.seminar.appendix .pred-dot { fill:var(--text-accent); }
+.seminar.appendix .appendix-equation { background:#f2f2f2; padding:4px 20px; font-size:26px; }
+.seminar.appendix .appendix-equation.wide { margin-top:24px; font-size:24px; }
+.seminar.appendix .appendix-equation .katex-display { margin:14px 0; }
+.seminar.appendix .symbol-table td { font-size:24px; padding:7px 14px; }
+.seminar.appendix .symbol-table td:first-child { width:160px; font-weight:700; }
+.seminar.appendix .symbol-table td:last-child { text-align:left; }
+.seminar.appendix .oks-reading { margin-top:24px; }
+.seminar.appendix .oks-reading td { text-align:left; padding:18px; font-size:28px; line-height:1.35; }
+.seminar.appendix .metric-block { margin-bottom:26px; }
+.seminar.appendix .metric-block h2 { font-size:40px; margin:0 0 6px; }
+.seminar.appendix .metric-block p { font-size:28px; line-height:1.4; margin:0; }
+.seminar.appendix .iou-row { display:grid; grid-template-columns:minmax(0, 1fr) 360px; gap:30px; align-items:center; }
+.seminar.appendix .iou-figure { width:360px; height:342px; }
+.seminar.appendix .iou-figure .truth-box { fill:none; stroke:#555; stroke-width:5; }
+.seminar.appendix .iou-figure .pred-box { fill:none; stroke:var(--text-accent); stroke-width:5; stroke-dasharray:14 7; }
+.seminar.appendix .iou-figure .overlap { fill:#d9d9d9; }
+.seminar.appendix .appendix-list { padding-left:1.2em; margin:0; }
+.seminar.appendix .appendix-list li { font-size:28px; margin-bottom:10px; }
+
+/* 研究背景：前回正式版4〜6ページを今回の書式（強調はオレンジ、図表は灰色）で再構成 */
+.seminar.background .background-heading { margin:0 0 10px; font-size:33.333px; font-weight:700; line-height:1.3; }
+.seminar.background .background-body { margin:0; font-size:30px; line-height:1.35; }
+.seminar.background .birth-chart-wrap { position:relative; }
+.seminar.background .lbw-photo { position:absolute; left:330px; top:-20px; width:260px; margin:0; text-align:center; }
+.seminar.background .lbw-photo img { width:260px; height:auto; }
+.seminar.background .lbw-photo figcaption { font-size:26px; font-weight:700; margin-top:2px; background:rgba(255,255,255,.85); }
+.seminar.background .nicu-top { display:grid; grid-template-columns:1fr 390px; gap:30px; align-items:start; margin-bottom:12px; }
+.seminar.background .nicu-terms { margin:0 0 10px; font-size:30px; line-height:1.4; }
+.seminar.background .nicu-terms span { display:inline-block; width:90px; }
+.seminar.background .nicu-photo { width:390px; height:184px; overflow:hidden; position:relative; }
+.seminar.background .nicu-photo img { position:absolute; max-width:none !important; width:113.03%; height:130.17%; left:-13.03%; top:-28.61%; }
+.seminar.background .nicu-problem { display:grid; grid-template-columns:520px 70px 1fr; align-items:center; gap:10px; background:#ededed; padding:16px 22px; }
+.seminar.background .nicu-plus { font-size:44px; font-weight:700; line-height:1; margin:4px 0 4px 190px; }
+.seminar.background .nicu-ratio { display:flex; align-items:center; gap:4px; background:#d9d9d9; border-radius:16px; padding:6px 16px; margin-bottom:8px; }
+.seminar.background .nicu-ratio img { width:76px; height:76px; }
+.seminar.background .ratio-colon { font-size:40px; font-weight:700; margin:0 40px; }
+.seminar.background .nicu-arrow { font-size:56px; color:#555; text-align:center; }
+.seminar.background .nicu-illust { width:100%; height:auto; }
+.seminar.background .observe-grid { display:grid; grid-template-columns:1fr 1fr 1fr; border:1.6667px solid #fff; }
+.seminar.background .observe-grid > div { border:1.6667px solid #fff; }
+.seminar.background .observe-grid .span2 { grid-column:span 2; }
+.seminar.background .observe-head { background:#d9d9d9; font-weight:700; text-align:center; font-size:30px; padding:6px; }
+.seminar.background .observe-desc { background:#ededed; font-size:25px; padding:6px 10px; line-height:1.3; white-space:nowrap; }
+.seminar.background .observe-desc ul { margin:2px 0 0; padding-left:1.2em; }
+.seminar.background .observe-desc li { margin:0; font-size:26px; }
+.seminar.background .observe-method { background:#f5f5f5; font-weight:700; text-align:center; font-size:28px; padding:6px; }
+.seminar.background .observe-cell { background:#ededed; text-align:center; padding:8px; height:236px; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; }
+.seminar.background .observe-cell img { max-height:180px; max-width:100%; object-fit:contain; }
+.seminar.background .observe-cell p { margin:6px 0 0; font-size:28px; font-weight:700; }
+.seminar.background .observe-grid .focus-top { box-shadow:inset 3px 3px 0 var(--text-accent), inset -3px 0 0 var(--text-accent); }
+.seminar.background .observe-grid .focus-bottom { box-shadow:inset 3px -3px 0 var(--text-accent), inset -3px 0 0 var(--text-accent); }
+.seminar.background .seminar-summary { bottom:100px; }

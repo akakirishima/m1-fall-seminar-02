@@ -23,6 +23,9 @@ dist/
 .slidev/
 /スライド/exports/*.png
 /スライド/exports/png/
+# This deck embeds local reference photos; keep the exported files local.
+/スライド/exports/seminar-02*.pptx
+/スライド/exports/seminar-02*.pdf
 
 # Raw recordings and model weights remain outside Git
 *.mp4
@@ -39,6 +42,7 @@ dist/
 /data/processed/
 /data/annotations/
 /local_data/
+/スライド/public/local-reference/
 /datasets/
 /models/
 **/runs/**/artifacts/
