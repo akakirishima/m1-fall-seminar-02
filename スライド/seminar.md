@@ -1025,6 +1025,264 @@ source: '作業者と対象の割当は、本測定前に固定する'
 <!-- 品質条件未達の方式も不成立として記録する。M0のラベル自身を正解にしてM0の精度を計算しない -->
 
 ---
+id: result-data
+chapter: 実験と結果
+class: result-shell
+sourceVisible: true
+source: '枠のみで未測定／実行IDは未登録／項目は評価方法のドラフトで、本評価前に固定する'
+---
+
+# 結果：データの内訳
+
+::content::
+
+<p class="shell-status">未測定（表の枠のみ）</p>
+
+<p class="shell-lead">用途ごとの患者、動画、注釈時間を示す</p>
+
+<table class="shell-table">
+  <thead><tr><th>用途</th><th>患者数</th><th>動画数</th><th>注釈時間</th><th>陽性の割合</th><th>判定不能の割合</th></tr></thead>
+  <tbody>
+    <tr><td>学習用</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>調整用</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>最終評価用</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">画像の枚数を患者数の代わりにしない</p>
+
+::summary::
+
+用途ごとの内訳と、陽性の少なさを確認する
+
+<!--
+数値は空欄で、実験の結果ではない。実測後に保存した集計から入れ、実行IDを発表根拠の対応表へ登録する
+患者数と動画は未確認（Q002）。陽性の割合は二値判定できる時間を分母にする。患者が足りない場合は分割の設計を見直す
+-->
+
+---
+id: result-image
+chapter: 実験と結果
+class: result-shell
+sourceVisible: true
+source: '枠のみで未測定／実行IDは未登録／項目は評価方法のドラフトで、本評価前に固定する'
+---
+
+# 結果①：画像判定
+
+::content::
+
+<p class="shell-status">未測定（表の枠のみ）</p>
+
+<p class="shell-lead">最終評価の患者で、手法ごとの画像判定を比べる</p>
+
+<table class="shell-table">
+  <thead><tr><th>手法</th><th>再現率</th><th>適合率</th><th>F1</th><th>陰性の誤検知率</th><th>回答率</th></tr></thead>
+  <tbody>
+    <tr><td>M1：学習なしVLM</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M2：学習ありVLM</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M3：分類器</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">判定不能、形式違反、推論失敗の件数も全対象を分母に示す</p>
+
+::summary::
+
+手や腕を見逃さず判定できたかを比べる
+
+<!--
+数値は空欄で、実験の結果ではない。実測後に保存した集計から入れ、実行IDを発表根拠の対応表へ登録する
+M0は自身の正解で精度を算出しない。正常回答だけの指標には回答率を添える。論文の報告値とは比較しない
+-->
+
+---
+id: result-patient
+chapter: 実験と結果
+class: result-shell
+sourceVisible: true
+source: '枠のみで未測定／実行IDは未登録／項目は評価方法のドラフトで、本評価前に固定する'
+---
+
+# 結果①：患者別の判定
+
+::content::
+
+<p class="shell-status">未測定（表の枠のみ）</p>
+
+<p class="shell-lead">全体の平均に隠れる失敗を、患者ごとに見る</p>
+
+<table class="shell-table">
+  <thead><tr><th>患者</th><th>画像数</th><th>M1のF1</th><th>M2のF1</th><th>M3のF1</th><th>M2－M1</th></tr></thead>
+  <tbody>
+    <tr><td>患者A</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>患者B</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>患者C</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">患者の行数は仮。分母が0の場合はNAとし、0点にしない</p>
+
+::summary::
+
+平均に隠れる失敗を、患者ごとに確認する
+
+<!--
+数値は空欄で、実験の結果ではない。実測後に保存した集計から入れ、実行IDを発表根拠の対応表へ登録する
+10月19日の「全体の値だけで判断しない」という指摘への対応。差は同じ患者同士で計算する。連続フレームを独立標本として有意差を主張しない。患者名はIDで示す
+-->
+
+---
+id: result-time
+chapter: 実験と結果
+class: result-shell
+sourceVisible: true
+source: '枠のみで未測定／実行IDは未登録／項目は評価方法のドラフトで、本評価前に固定する'
+---
+
+# 結果①：推論時間
+
+::content::
+
+<p class="shell-status">未測定（表の枠のみ）</p>
+
+<p class="shell-lead">同じ画像を1枚ずつ処理し、モデルごとの時間を比べる</p>
+
+<table class="shell-table">
+  <thead><tr><th>手法</th><th>処理した<br>枚数</th><th>全体の<br>時間</th><th>1枚あたりの<br>平均</th><th>モデルの<br>読み込み</th><th>最大GPU<br>メモリ</th></tr></thead>
+  <tbody>
+    <tr><td>M1：学習なしVLM</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M2：学習ありVLM</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M3：分類器</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">1枚あたりの平均＝全体の時間÷処理した枚数。読み込みは全体の時間に含めない</p>
+
+::summary::
+
+全体の時間と1枚あたりの平均で、モデルの速さを比べる
+
+<!--
+数値は空欄で、実験の結果ではない。実測後に保存した集計から入れ、実行IDを発表根拠の対応表へ登録する
+全体の時間は、モデルの読み込み後から全画像の回答を読み取り終えるまで。GPU処理は完了を待って測る。失敗した画像も処理した枚数に含め、件数を別に示す
+同じPC、同じ画像で測り、他の重い処理を同時に動かさない。バッチサイズは全モデル1にそろえる。まとめて処理すると速くなるモデルとの不公平を避けるためで、まとめて処理した場合の速さはこの比較では分からない。VLMは出力の長さでも時間が変わるので生成長も記録する
+1枚ごとの時間も保存し、最初の数枚の遅さや外れ値を確認できるようにする
+M0は人の作業で推論時間がないため、結果③で扱う。1枚あたりの平均に抽出枚数を掛けると、動画の処理時間を見積もれる（1秒に1枚なら動画1時間で3,600枚）。フレーム抽出の時間は別に測る
+学習時間は初期費用で、推論時間に含めない
+-->
+
+---
+id: result-interval
+chapter: 実験と結果
+class: result-shell
+sourceVisible: true
+source: '枠のみで未測定／実行IDは未登録／項目は評価方法のドラフトで、本評価前に固定する'
+---
+
+# 結果②：区間候補
+
+::content::
+
+<p class="shell-status">未測定（表の枠のみ）</p>
+
+<p class="shell-lead">画像の判定をまとめた区間を、正解の区間と比べる</p>
+
+<table class="shell-table">
+  <thead><tr><th>手法</th><th>残った陽性（秒）</th><th>余計な除外（秒）</th><th>完全見逃し（件）</th><th>開始終了のずれ</th></tr></thead>
+  <tbody>
+    <tr><td>M1：学習なしVLM</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M2：学習ありVLM</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M3：分類器</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">各正解区間をどれだけ覆えたかも示す。区間化の条件は未確定</p>
+
+::summary::
+
+区間の指定に使えるかを比べる
+
+<!--
+数値は空欄で、実験の結果ではない。実測後に保存した集計から入れ、実行IDを発表根拠の対応表へ登録する
+1秒でも重なれば検出とはしない。M1対M2では区間化の設定をそろえた比較を残す。抽出間隔による取りこぼしと、モデルの誤判定を分ける
+-->
+
+---
+id: result-work
+chapter: 実験と結果
+class: result-shell
+sourceVisible: true
+source: '枠のみで未測定／実行IDは未登録／項目は評価方法のドラフトで、本評価前に固定する'
+---
+
+# 結果③：人の作業
+
+::content::
+
+<p class="shell-status">未測定（表の枠のみ）</p>
+
+<p class="shell-lead">同じ品質基準で、人の作業時間を比べる</p>
+
+<table class="shell-table">
+  <thead><tr><th>手法</th><th>品質基準</th><th>確認修正の時間</th><th>残った誤り</th><th>計算時間</th><th>初期費用</th></tr></thead>
+  <tbody>
+    <tr><td>M0：手作業</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M1：学習なしVLM</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M2：学習ありVLM</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M3：分類器</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">品質基準の許容値と、M0の品質の確認方法は未確定</p>
+
+::summary::
+
+品質を満たす条件で、人の時間がどれだけ変わるかを確かめる
+
+<!--
+数値は空欄で、実験の結果ではない。実測後に保存した集計から入れ、実行IDを発表根拠の対応表へ登録する
+品質基準を満たさない方法も不成立として記録する。陰性区間の確認時間も含める。実作業、計算の経過時間、初期の注釈と学習の費用を分ける。作業者の数と対象の割当は未確定
+-->
+
+---
+id: result-errors
+chapter: 実験と結果
+class: result-shell
+sourceVisible: true
+source: '枠のみで未測定／実行IDは未登録／項目は評価方法のドラフトで、本評価前に固定する'
+---
+
+# 結果：誤りの分析
+
+::content::
+
+<p class="shell-status">未測定（表の枠のみ）</p>
+
+<p class="shell-lead">どの場面で失敗するかを、手法ごとに整理する</p>
+
+<table class="shell-table">
+  <thead><tr><th>場面（候補）</th><th>区間数</th><th>M1の誤り</th><th>M2の誤り</th><th>M3の誤り</th></tr></thead>
+  <tbody>
+    <tr><td>指先だけ、手袋</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>反射、遮蔽</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>乳児の手</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>ROIの境界</td><td>－</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">場面は開発用の患者で実在を確認してから決める。代表例の図は実測後に追加</p>
+
+::summary::
+
+失敗の条件を確かめ、手法を選ぶ判断につなげる
+
+<!--
+数値は空欄で、実験の結果ではない。実測後に保存した集計から入れ、実行IDを発表根拠の対応表へ登録する
+10月19日の「動画や場面ごとに中身を見る」という指摘への対応。最終評価で新しく見つかった失敗は探索的な所見として区別する。見逃しと誤検知は実測後に分けて書く
+-->
+
+---
 layout: chapter-divider
 id: chapter-summary
 ---
