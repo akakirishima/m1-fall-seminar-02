@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-10-30T16:10:27.308694+09:00",
+  "purpose": "Official source metadata; not installed-package versions or runtime validation",
+  "repositories": [
+    {
+      "name": "K-Dense-AI/scientific-agent-skills",
+      "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "api_url": "https://api.github.com/repos/K-Dense-AI/scientific-agent-skills",
+      "default_branch": "main",
+      "observed_revision": "5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+      "revision_url": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/5f2bc0341354fd5590aef76a533ada1e1e5b4e62",
+      "license_metadata": "MIT",
+      "pushed_at": "2026-10-26T09:36:15Z"
+    },
+    {
+      "name": "bigspinai/reliable-agentic-science",
+      "url": "https://github.com/bigspinai/reliable-agentic-science",
+      "api_url": "https://api.github.com/repos/bigspinai/reliable-agentic-science",
+      "default_branch": "main",
+      "observed_revision": "711ab047c963957cd8aede3a50b830c613297bb4",
+      "revision_url": "https://github.com/bigspinai/reliable-agentic-science/tree/711ab047c963957cd8aede3a50b830c613297bb4",
+      "license_metadata": "MIT",
+      "pushed_at": "2026-08-03T04:22:19Z"
+    },
+    {
+      "name": "snap-stanford/POPPER",
+      "url": "https://github.com/snap-stanford/POPPER",
+      "api_url": "https://api.github.com/repos/snap-stanford/POPPER",
+      "default_branch": "main",
+      "observed_revision": "59611864e09dd15d7528e240ad87c7ddbb4a701c",
+      "revision_url": "https://github.com/snap-stanford/POPPER/tree/59611864e09dd15d7528e240ad87c7ddbb4a701c",
+      "license_metadata": null,
+      "pushed_at": "2025-05-14T03:19:14Z"
+    }
+  ],
+  "models": [],
+  "errors": []
+}

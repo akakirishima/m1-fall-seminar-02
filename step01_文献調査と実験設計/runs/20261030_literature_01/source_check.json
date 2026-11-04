@@ -1,0 +1,95 @@
+{
+  "retrieved_at": "2026-10-30T10:51:22.548747+00:00",
+  "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11644908/fullTextXML",
+  "command": [
+    "step01_文献調査と実験設計/scripts/inspect_intervention_paper.py",
+    "--output-dir",
+    "step01_文献調査と実験設計/runs/20261030_literature_01"
+  ],
+  "status": "success",
+  "source_sha256": "85fc320e0e5ac9fdedd3a1526c37e39524f16da490e4ed31281a5f70721f51a2",
+  "title": "Depth-Based Intervention Detection in the Neonatal Intensive Care Unit Using Vision Transformers",
+  "ids": {
+    "pmcid": "PMC11644908",
+    "pmcid-ver": "PMC11644908.1",
+    "pmcaid": "11644908",
+    "pmcaiid": "11644908",
+    "pmid": "39686290",
+    "doi": "10.3390/s24237753",
+    "publisher-id": "sensors-24-07753"
+  },
+  "authors": [
+    {
+      "surname": "Hajj-Ali",
+      "given_names": "Zein"
+    },
+    {
+      "surname": "Dosso",
+      "given_names": "Yasmina Souley"
+    },
+    {
+      "surname": "Greenwood",
+      "given_names": "Kim"
+    },
+    {
+      "surname": "Harrold",
+      "given_names": "JoAnn"
+    },
+    {
+      "surname": "Green",
+      "given_names": "James R."
+    }
+  ],
+  "sections": [
+    {
+      "title": "2.1.1. NICU Data Collection",
+      "paragraphs": [
+        "Data were collected from 27 neonatal patients in the NICU at the Children’s Hospital of Eastern Ontario (CHEO) following approval by the research ethics boards from the hospital and Carleton University. The data were collected as part of a larger research initiative to develop multi-modal noncontact patient monitoring methods and technologies. The dataset cannot be released publicly due to the restrictions set by the research ethics board.",
+        "Figure 3 shows an example of the setup in the NICU environment. An RGB-D camera (Intel RealSense SR300, Santa Clara, CA, USA) was placed above or beside the patient’s bed. The camera was chosen due to its small size, affordability, and suitable depth range to capture patients at a close distance. Recordings were captured at a resolution of 640 × 480 pixels at 30 frames per second. The cameras were placed such that the view planes were at nonuniform angles relative to the plane of the bed. The SR300 captures depth information using the coded-light method; using a combination of an IR projector and IR camera sensor to generate a depth pixel frame. The camera also includes a separate RGB camera sensor that can be used in conjunction with the depth stream to form an RGB-D image. Note that in the present study, all proposed methods use only privacy-preserving depth image data.",
+        "The gold standard respiratory rate signals of the patients were recorded from the bedside patient monitor (Draegar Infinity Delta). Custom Patient Monitor Data Import (PMDI) software Version 1.0, developed for the project, was used to import the data from the serial port on the monitor [ 25 ]. A bedside annotation application was used to annotate events (clinical interventions, etc.) in real time. All data from the camera and patient monitor were saved on a data acquisition laptop.",
+        "Still images were extracted from the patient recordings every 30 s and labelled as either ‘Intervention’ (positive) or ‘No Intervention’ (negative). This resulted in 14,892 images in total, with 1260 in the positive class and 13,632 in the negative class (a class imbalance of 10.8:1 in favour of the negative class). The ‘Intervention’ class comprised images where a nurse or other practitioner was reaching into the camera’s view to tend to the patient, while the ‘No Intervention’ class included only the patient ( Figure 4 ).",
+        "The difficulty of intervention detection from depth data can sometimes be misrepresented. Looking at Figure 4 , one would assume that the difference in the depth frame between the nurse’s hands and the patient/bed would be apparent; however, the task is often more difficult. In Figure 5 , an intervention frame can be seen that is more challenging to classify by looking only at the depth channel (on the right). If the caregiver’s hands are near or at the height of the patient’s bed, the difference in depth can be sufficiently small to require more advanced methods. This is demonstrated by including a baseline approach in the present study."
+      ]
+    },
+    {
+      "title": "2.2. Proposed Method",
+      "paragraphs": [
+        "Vision transformers have demonstrated excellent accuracy in image classification tasks since their introduction in ref. [ 10 ]. We propose the use of a ViT pre-trained on the ImageNet dataset [ 14 ] and fine-tuned on a subset of our own set of 14,892 depth images. The model architectures were implemented using the PyTorch Image Models library [ 27 ]. Two model sizes with similar architecture but different numbers of trainable parameters were chosen, ‘vit_tiny_patch_16_224’ and ‘vit_base_patch_16_224’, with ∼5.4 M parameters and ∼85 M parameters, respectively. Each of the models accepts input images with a resolution of 224 × 224 pixels and divides them into 16 × 16 patches for embedding. The difference in the number of trainable parameters comes from an increase in the dimensions of the hidden embedding layer and the number of heads in the attention mechanism when moving from the ‘tiny’ model to the ‘base’ model.",
+        "Performance evaluation : Throughout this study, we have used a repeated five-fold cross-validation approach, where the dataset of 27 patients was divided into five distinct “folds”. For each combination of system design parameters, five models were trained and evaluated, and the average performance across the five models was computed. Within each of the five folds, a classification model was trained on four folds (approximately 21 patients), while the remaining 5–6 patients not used to train the model were used to evaluate the model. In this way, all patient data were used to both train and evaluate models but never the same model. This entire process was repeated five times, with different patients assigned to each fold in each repetition. The mean across the five repetitions was reported as the final performance metric.",
+        "Hyperparameters : The training of the models utilized a mini-batch size of 16 and a learning rate set at 0.01 over a maximum of 15 epochs. Visual inspection of preliminary learning curves indicated no substantial reduction in validation loss beyond 15 epochs. Stochastic gradient descent was employed as the optimizer, with a momentum of 0.9. The input images were each resized to dimensions of 224 × 224 pixels, which altered their aspect ratio from 4:3 to 1:1. Finally, random rotations (ranging from 0° to 360°) and horizontal/vertical flips were applied to the images in the training sets.",
+        "Along with the size of the model, the effect of three other system design parameters on model performance was also explored. These parameters are described in the upcoming Section 2.2.1 , Section 2.2.2 and Section 2.2.3 , and a summary can be seen in Table 1 . A visual representation of the data flow and utilization of the proposed system design parameters can be seen in Figure 8 ."
+      ]
+    },
+    {
+      "title": "2.2.1. Simulated Data",
+      "paragraphs": [
+        "Since the data collected from the NICU contain more instances without interventions than those with, the resulting labelled data had a high class imbalance of 10.8:1 in favour of the negative (no-intervention) class. To help correct for this imbalance, simulated intervention data were collected as previously described ( Section 2.1 ). These data comprised 600 images of simulated interventions that were added to the positive class, bringing the class imbalance down to approximately 7.3:1. Both model sizes were trained without the addition of the simulated data, and then the process was repeated with the inclusion of the simulated data in each training fold (i.e., simulated data were used for training but not for testing)."
+      ]
+    },
+    {
+      "title": "2.2.2. Perspective Transformation",
+      "paragraphs": [
+        "The effect of a perspective transformation (PT) algorithm on the performance of the models was explored. As discussed in ref. [ 5 ], we previously demonstrated that perspective transformation can account for nonoptimal depth camera placement relative to the patient. In that study, perspective transform was shown to improve an ROI selection algorithm for subsequent respiration rate estimation. Based on those results, it was thought that applying the transformation to the data used to build the ViT-based intervention detection model might also improve its performance. The patient data collected from the NICU and the simulated data were transformed by manually selecting four registration points in the plane of the bedding for each new recording. The rotation matrix was found and applied to all frames extracted from the same recording. The experiments were then re-run using these transformed data as the input. Models were trained and tested with and without perspective transform to investigate its effect on intervention detection accuracy."
+      ]
+    },
+    {
+      "title": "2.2.3. HHA Encoding",
+      "paragraphs": [
+        "ViTs are not typically trained from scratch for specific image classification tasks. Rather, ViT models are typically pre-trained on large datasets using self-supervised learning techniques, such as masked auto-encoding (MAE) [ 28 ]. Pre-trained ViTs are then fine-tuned for specific tasks through the addition of a task-specific prediction head. Such pre-training of ViT requires a large amount of data and extensive compute resources. Some ViT models pre-trained on large image datasets, such as ImageNet, have been released publicly by researchers at Google Research [ 29 ] and other groups. As these models have been pre-trained on 3-channel RGB images, there is latitude as to how the single channel of depth data should be mapped to a 3-channel input. The effect of HHA encoding on the performance of the proposed intervention detection model was investigated.",
+        "Each of the datasets described previously was transformed to be HHA-encoded, and the experiments were re-run. Models were trained with and without HHA encoding to investigate its effect on intervention detection accuracy. Models trained without HHA encoding were modified to accept 1-channel images as inputs. The pre-trained input layer weights from each of the 3 channels normally used for R, G, and B were summed into a single channel."
+      ]
+    },
+    {
+      "title": "2.3. Baseline Methods",
+      "paragraphs": [
+        "The models explored in this study were compared against the best-performing CNN-based intervention detection model proposed by Souley Dosso et al. in ref. [ 2 ]. Specifically, the model chosen for comparison was the multi-modal RGB-D fusion model, which used a VGG-16 CNN architecture [ 7 ] and was pre-trained on the ImageNet dataset [ 14 ] and fine-tuned on the intervention detection dataset described in Section 2.1 .",
+        "Additionally, the exclusively depth-based model from Souley Dosso’s study was included for comparison given its shared reliance on depth modality, though it resulted in lower performance metrics overall. For this model, the VGG-16 input layer was modified by removing two of its three input channels, allowing the pre-trained weights to be fine-tuned on the single depth channel. Further, a conventional (rules-based) method was also evaluated as an alternative baseline for comparison. The method consists of designating a known nonintervention frame for each patient recording and calculating the mean squared error of each of the rest of the frames.",
+        "As a final baseline model for comparison with our depth-based models, the RGB-D and depth-based models presented in ref. [ 2 ] were also re-trained and evaluated using the design parameters outlined in Section 2.2.1 , Section 2.2.2 and Section 2.2.3 . This enabled direct comparisons between the depth-based vision transformer models proposed here and Souley Dosso’s depth-based CNN models for each of the design variables explored in this study."
+      ]
+    }
+  ],
+  "related_references": [
+    "2. Souley Dosso Y. Greenwood K. Harrold J. Green J.R. RGB-D Scene Analysis in the NICU Comput. Biol. Med. 2021 138 104873 10.1016/j.compbiomed.2021.104873 34600329"
+  ],
+  "code_sha256": "20e2af67ebc3f5214eaee2f819a9d5746e414f7e4dd7dbb89ec6ecf9aa3a9074"
+}

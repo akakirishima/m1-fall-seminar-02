@@ -23,6 +23,9 @@ dist/
 .slidev/
 /スライド/exports/*.png
 /スライド/exports/png/
+# This deck embeds local reference photos; keep the exported files local.
+/スライド/exports/seminar-02*.pptx
+/スライド/exports/seminar-02*.pdf
 
 # Raw recordings and model weights remain outside Git
 *.mp4
@@ -36,8 +39,28 @@ dist/
 *.safetensors
 *.gguf
 /data/raw/
+/data/processed/
+/data/annotations/
+/local_data/
+/スライド/public/local-reference/
 /datasets/
 /models/
+**/runs/**/artifacts/
+**/runs/**/inputs.private.json
+**/runs/**/outputs.private.json
 
 # Reference presentations contain embedded videos; retain locally
-/スライド/references/*.pptx
+/スライド/references/**/*.pptx
+
+# Local patient metadata, annotations, and tool project files
+/data/local/
+*.eaf
+*.pfsx
+
+# Browser verification artifacts
+.playwright-cli/
+/output/playwright/
+
+# Additional source-video formats supported by the annotation UI
+*.webm
+*.m4v

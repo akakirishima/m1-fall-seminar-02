@@ -1,0 +1,445 @@
+{
+  "schema_version": 1,
+  "project_id": "m1-fall-seminar-02",
+  "updated_on": "2026-11-02",
+  "plan_version": "1.7",
+  "current_step": "step01",
+  "objective": "乳児IR映像の成人介入に関係する区間を検出し、確認修正を含む人の作業負担の削減を評価する。",
+  "methods": [
+    {
+      "id": "M0",
+      "name": "手作業",
+      "role": "正解作成と作業時間の基準",
+      "status": "not_started"
+    },
+    {
+      "id": "M1",
+      "name": "追加学習なしVLM",
+      "role": "専用の追加学習なしでの判定",
+      "status": "not_started",
+      "readme": "step03_各手法の実装と実験/M1_学習なしQwen/README.md"
+    },
+    {
+      "id": "M2",
+      "name": "追加学習ありVLM",
+      "role": "M1と同じ基盤モデルの学習前後比較",
+      "status": "not_started",
+      "readme": "step03_各手法の実装と実験/M2_追加学習Qwen/README.md"
+    },
+    {
+      "id": "M3",
+      "name": "論文に基づく分類モデル",
+      "role": "M2と共通の学習対象で分類法を比較",
+      "status": "not_started",
+      "readme": "step03_各手法の実装と実験/M3_論文手法/README.md"
+    }
+  ],
+  "steps": [
+    {
+      "id": "step01",
+      "status": "in_progress",
+      "readme": "step01_文献調査と実験設計/README.md",
+      "work_package_ids": [
+        "P01"
+      ]
+    },
+    {
+      "id": "step02",
+      "status": "not_started",
+      "readme": "step02_正解データ作成/README.md",
+      "work_package_ids": [
+        "P02",
+        "P03",
+        "P04"
+      ]
+    },
+    {
+      "id": "step03",
+      "status": "not_started",
+      "readme": "step03_各手法の実装と実験/README.md",
+      "work_package_ids": [
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ]
+    },
+    {
+      "id": "step04",
+      "status": "not_started",
+      "readme": "step04_総合比較と考察/README.md",
+      "work_package_ids": [
+        "P11",
+        "P12",
+        "P13",
+        "P14"
+      ]
+    }
+  ],
+  "documents": {
+    "overview": "研究全体像.md",
+    "decisions": "方針変更履歴.md",
+    "latest_daily_log": "日報/2026-11-02.md",
+    "annotation_protocol": "共通/ラベル付け規則.md",
+    "evaluation_protocol": "共通/評価方法.md",
+    "oss_registry": "共通/使用OSSと出典.md",
+    "record_protocol": "共通/AI向け記録形式.md",
+    "critical_review_candidates": "調査/批判的検討と反証実験を支えるOSS_20261030.md",
+    "detailed_plan": "研究計画_詳細.md",
+    "slide_references": "スライド/references/README.md",
+    "workflow_protocol": "共通/作業フォルダと発表根拠の運用.md",
+    "presentation_evidence": "スライド/発表根拠の対応表.md"
+  },
+  "protocol_versions": {
+    "annotation": "draft-0.2",
+    "evaluation": "draft-0.1",
+    "dataset_split": null
+  },
+  "datasets": [],
+  "model_candidates": [
+    "Qwen/Qwen3.5-4B",
+    "Qwen/Qwen3-VL-4B-Instruct"
+  ],
+  "selected_backbone": null,
+  "open_questions": [
+    {
+      "id": "Q001",
+      "question": "比較対象の介入検知原論文の正式な書誌情報",
+      "status": "resolved",
+      "resolution": "取得したブランチで本人確認済みの基準論文を反映。全文と実装条件の確認は未完了。",
+      "evidence_ref": "step01_文献調査と実験設計/文献確認表.md"
+    },
+    {
+      "id": "Q002",
+      "question": "利用できる動画、患者数、注釈ツール",
+      "status": "unresolved"
+    },
+    {
+      "id": "Q003",
+      "question": "成人の手や腕の映り込みと、除外したい介入の関係",
+      "status": "unresolved"
+    },
+    {
+      "id": "Q004",
+      "question": "同じVLMで推論と追加学習が成立するモデルと環境",
+      "status": "unresolved"
+    },
+    {
+      "id": "Q005",
+      "question": "批判的検討を支える外部スキルの採用と有効性",
+      "status": "unresolved"
+    },
+    {
+      "id": "Q006",
+      "question": "最終比較を終える締切と発表日程",
+      "status": "unresolved"
+    },
+    {
+      "id": "Q007",
+      "question": "試行実測に基づく必要データ規模、注釈と学習と比較の所要時間",
+      "status": "unresolved"
+    },
+    {
+      "id": "Q008",
+      "question": "旧形式manifestの互換性と新規実行の記録検査の分離",
+      "status": "resolved",
+      "resolution": "旧形式はlegacy_manifestsへ個別登録してpartialとして保持。新しい固定形式の不備は従来どおり検出し、合成テストと全体の記録検査で確認した。モデルの検証や再現確認の完了は意味しない。",
+      "evidence_ref": "共通/作業フォルダと発表根拠の運用.md"
+    }
+  ],
+  "next_actions": [
+    {
+      "id": "A002",
+      "step_id": "step02",
+      "work_package_id": "P02",
+      "action": "動画の所在、利用条件、患者数を確認し、フレーム抽出前に試行患者の用途を割り当てる",
+      "status": "pending"
+    },
+    {
+      "id": "A001",
+      "step_id": "step01",
+      "work_package_id": "P01",
+      "action": "基準論文の入力、構造、初期重み、学習と評価条件、IRへの変更を対応表へ整理する",
+      "status": "pending"
+    },
+    {
+      "id": "A004",
+      "step_id": "step02",
+      "work_package_id": "P03",
+      "action": "P02の患者割当後、少数動画で注釈、共通形式への変換、画像抽出の対応、実作業時間を確認する",
+      "status": "pending"
+    },
+    {
+      "id": "A003",
+      "step_id": "step03",
+      "work_package_id": "P05",
+      "action": "実データを待たずに環境情報を確認し、P03後に候補Qwenの少数推論とP07の同基盤追加学習を確認する",
+      "status": "pending"
+    }
+  ],
+  "capabilities": {
+    "structured_state": "implemented",
+    "experiment_index": "implemented",
+    "record_validation": "implemented",
+    "automatic_model_run_capture": "not_integrated",
+    "model_inference": "not_run",
+    "model_training": "not_run",
+    "work_package_run_index": "implemented",
+    "presentation_evidence_register": "empty_document_created"
+  },
+  "data_policy": {
+    "raw_data_on_github": false,
+    "training_data_on_github": false,
+    "labels_on_github": false,
+    "weights_on_github": false,
+    "private_locator_file": "local_data/paths.json",
+    "public_record_rule": "共有記録は機微な情報を含まないデータIDと版で参照する。患者情報や実データパスはローカル記録へ置く。"
+  },
+  "evidence_limits": [
+    "モデルの精度、速度、GPUメモリは未測定。",
+    "データと分割は未登録。",
+    "過去の記録は実行時に残った範囲だけを利用し、不足項目を推測で補わない。",
+    "前回研究のresearch_tools/run_record.pyは実在を確認。今回研究への統合と動作検証は未実施。"
+  ],
+  "sync_notes": {
+    "source_branch": "origin/codex/research-preparation",
+    "source_commit": "1a294ce",
+    "local_changes_backup": "git stash: codex backup before GitHub update 2026-11-02",
+    "annotation_ui": "画像版と動画区間版を取得。実研究データの注釈とモデル実験は未実施。",
+    "decision_id_collision": "D004は並行作業で重複。既存履歴を保持し、論文特定と構造化記録の題名で区別する。",
+    "record_compatibility": "取得時は旧形式と固定項目検査が不一致。11月2日に旧形式の個別登録とpartialの扱いを追加し、原本を保持したまま記録検査が成功した。"
+  },
+  "planning_target": {
+    "confirmed_on": "2026-11-02",
+    "scope": "M1、M2、M3の最終比較まで。既存目的のM0との作業負担比較も含める。",
+    "user_reply": "3手法の最終比較を終えるところまで",
+    "deadline": null,
+    "completion_packages": [
+      "P12",
+      "P13",
+      "P14"
+    ],
+    "schedule_basis": "少数注釈とモデル動作確認の実測後に見積もる。過去の12月3日案は確定期限ではない。"
+  },
+  "current_work_package": "P01",
+  "work_packages": [
+    {
+      "id": "P01",
+      "title": "検出対象と比較の問いを具体化",
+      "step_id": "step01",
+      "depends_on": [],
+      "status": "in_progress",
+      "deliverable": "対象の定義案、比較表、原論文の条件対応表",
+      "plan_ref": "研究計画_詳細.md",
+      "folder": "step01_文献調査と実験設計/P01_検出対象と比較設計",
+      "readme": "step01_文献調査と実験設計/P01_検出対象と比較設計/README.md",
+      "runs_dir": "step01_文献調査と実験設計/P01_検出対象と比較設計/runs"
+    },
+    {
+      "id": "P02",
+      "title": "動画登録と試行患者の割当",
+      "step_id": "step02",
+      "depends_on": [],
+      "status": "not_started",
+      "deliverable": "ローカル動画一覧、患者対応、試行患者の用途",
+      "plan_ref": "研究計画_詳細.md",
+      "folder": "step02_正解データ作成/P02_動画登録と試行患者割当",
+      "readme": "step02_正解データ作成/P02_動画登録と試行患者割当/README.md",
+      "runs_dir": "step02_正解データ作成/P02_動画登録と試行患者割当/runs"
+    },
+    {
+      "id": "P03",
+      "title": "少数注釈と画像抽出の試行",
+      "step_id": "step02",
+      "depends_on": [
+        "P01",
+        "P02"
+      ],
+      "status": "not_started",
+      "deliverable": "試行ラベル、共通形式への変換、画像との対応、実作業時間",
+      "plan_ref": "研究計画_詳細.md",
+      "preparation_status": "合成データの注釈UI検証まで。実動画、共通変換、画像抽出は未実施。",
+      "folder": "step02_正解データ作成/P03_注釈と画像抽出の試行",
+      "readme": "step02_正解データ作成/P03_注釈と画像抽出の試行/README.md",
+      "runs_dir": "step02_正解データ作成/P03_注釈と画像抽出の試行/runs"
+    },
+    {
+      "id": "P04",
+      "title": "共通データと患者分割の作成",
+      "step_id": "step02",
+      "depends_on": [
+        "P03"
+      ],
+      "status": "not_started",
+      "deliverable": "版付き規則と患者分割、共通入力一覧、ラベル、検査結果",
+      "plan_ref": "研究計画_詳細.md",
+      "folder": "step02_正解データ作成/P04_共通データと患者分割",
+      "readme": "step02_正解データ作成/P04_共通データと患者分割/README.md",
+      "runs_dir": "step02_正解データ作成/P04_共通データと患者分割/runs"
+    },
+    {
+      "id": "P05",
+      "title": "学習なしQwenの動作確認",
+      "step_id": "step03",
+      "depends_on": [
+        "P03"
+      ],
+      "status": "not_started",
+      "deliverable": "少数推論の原文、入力対応、時間とメモリ",
+      "plan_ref": "研究計画_詳細.md",
+      "method_id": "M1",
+      "readme": "step03_各手法の実装と実験/M1_学習なしQwen/P05_少数推論動作確認/README.md",
+      "folder": "step03_各手法の実装と実験/M1_学習なしQwen/P05_少数推論動作確認",
+      "runs_dir": "step03_各手法の実装と実験/M1_学習なしQwen/P05_少数推論動作確認/runs"
+    },
+    {
+      "id": "P06",
+      "title": "論文手法の実装と動作確認",
+      "step_id": "step03",
+      "depends_on": [
+        "P01",
+        "P03"
+      ],
+      "status": "not_started",
+      "deliverable": "原典との対応と変更点、少数更新、保存再読込、予測",
+      "plan_ref": "研究計画_詳細.md",
+      "method_id": "M3",
+      "readme": "step03_各手法の実装と実験/M3_論文手法/P06_実装と動作確認/README.md",
+      "folder": "step03_各手法の実装と実験/M3_論文手法/P06_実装と動作確認",
+      "runs_dir": "step03_各手法の実装と実験/M3_論文手法/P06_実装と動作確認/runs"
+    },
+    {
+      "id": "P07",
+      "title": "同じQwenの追加学習確認",
+      "step_id": "step03",
+      "depends_on": [
+        "P05"
+      ],
+      "status": "not_started",
+      "deliverable": "学習入力の照合、勾配更新、保存再読込、同条件の推論",
+      "plan_ref": "研究計画_詳細.md",
+      "method_id": "M2",
+      "readme": "step03_各手法の実装と実験/M2_追加学習Qwen/P07_追加学習動作確認/README.md",
+      "folder": "step03_各手法の実装と実験/M2_追加学習Qwen/P07_追加学習動作確認",
+      "runs_dir": "step03_各手法の実装と実験/M2_追加学習Qwen/P07_追加学習動作確認/runs"
+    },
+    {
+      "id": "P08",
+      "title": "学習なしQwenの比較用条件決定",
+      "step_id": "step03",
+      "depends_on": [
+        "P04",
+        "P07"
+      ],
+      "status": "not_started",
+      "deliverable": "採用する共通質問と推論条件、調整用の保存予測",
+      "plan_ref": "研究計画_詳細.md",
+      "method_id": "M1",
+      "readme": "step03_各手法の実装と実験/M1_学習なしQwen/P08_比較条件の決定/README.md",
+      "folder": "step03_各手法の実装と実験/M1_学習なしQwen/P08_比較条件の決定",
+      "runs_dir": "step03_各手法の実装と実験/M1_学習なしQwen/P08_比較条件の決定/runs"
+    },
+    {
+      "id": "P09",
+      "title": "論文手法の共通データでの学習",
+      "step_id": "step03",
+      "depends_on": [
+        "P04",
+        "P06"
+      ],
+      "status": "not_started",
+      "deliverable": "採用重み、停止規則、調整履歴、調整用の保存予測",
+      "plan_ref": "研究計画_詳細.md",
+      "method_id": "M3",
+      "readme": "step03_各手法の実装と実験/M3_論文手法/P09_共通データでの学習/README.md",
+      "folder": "step03_各手法の実装と実験/M3_論文手法/P09_共通データでの学習",
+      "runs_dir": "step03_各手法の実装と実験/M3_論文手法/P09_共通データでの学習/runs"
+    },
+    {
+      "id": "P10",
+      "title": "Qwenの共通データでの追加学習",
+      "step_id": "step03",
+      "depends_on": [
+        "P04",
+        "P07",
+        "P08"
+      ],
+      "status": "not_started",
+      "deliverable": "採用重み、調整履歴、M1との条件照合、調整用の保存予測",
+      "plan_ref": "研究計画_詳細.md",
+      "method_id": "M2",
+      "readme": "step03_各手法の実装と実験/M2_追加学習Qwen/P10_共通データでの追加学習/README.md",
+      "folder": "step03_各手法の実装と実験/M2_追加学習Qwen/P10_共通データでの追加学習",
+      "runs_dir": "step03_各手法の実装と実験/M2_追加学習Qwen/P10_共通データでの追加学習/runs"
+    },
+    {
+      "id": "P11",
+      "title": "全条件と評価手順の固定",
+      "step_id": "step04",
+      "depends_on": [
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "not_started",
+      "deliverable": "記入済み固定票、採点検査、時間比較の対象割当と順序",
+      "plan_ref": "研究計画_詳細.md",
+      "folder": "step04_総合比較と考察/P11_条件と評価手順の固定",
+      "readme": "step04_総合比較と考察/P11_条件と評価手順の固定/README.md",
+      "runs_dir": "step04_総合比較と考察/P11_条件と評価手順の固定/runs"
+    },
+    {
+      "id": "P12",
+      "title": "共通患者での最終精度比較",
+      "step_id": "step04",
+      "depends_on": [
+        "P11"
+      ],
+      "status": "not_started",
+      "deliverable": "全手法の最終保存予測、患者別指標、失敗集計",
+      "plan_ref": "研究計画_詳細.md",
+      "folder": "step04_総合比較と考察/P12_最終精度比較",
+      "readme": "step04_総合比較と考察/P12_最終精度比較/README.md",
+      "runs_dir": "step04_総合比較と考察/P12_最終精度比較/runs"
+    },
+    {
+      "id": "P13",
+      "title": "手作業と確認修正の負担比較",
+      "step_id": "step04",
+      "depends_on": [
+        "P11"
+      ],
+      "status": "not_started",
+      "deliverable": "人の時間、計算の時間、修正後品質、初期費用",
+      "plan_ref": "研究計画_詳細.md",
+      "folder": "step04_総合比較と考察/P13_作業負担比較",
+      "readme": "step04_総合比較と考察/P13_作業負担比較/README.md",
+      "runs_dir": "step04_総合比較と考察/P13_作業負担比較/runs"
+    },
+    {
+      "id": "P14",
+      "title": "誤り分析と結論と発表",
+      "step_id": "step04",
+      "depends_on": [
+        "P12",
+        "P13"
+      ],
+      "status": "not_started",
+      "deliverable": "条件付きの比較結論、誤り事例、限界、実行IDとの対応",
+      "plan_ref": "研究計画_詳細.md",
+      "folder": "step04_総合比較と考察/P14_誤り分析と発表",
+      "readme": "step04_総合比較と考察/P14_誤り分析と発表/README.md",
+      "runs_dir": "step04_総合比較と考察/P14_誤り分析と発表/runs"
+    }
+  ],
+  "legacy_manifests": [
+    {
+      "manifest_ref": "step02_正解データ作成/runs/20261102_video_ui_02/manifest.json",
+      "operation": "synthetic_video_ui_verification",
+      "model_experiment": false,
+      "reason": "固定形式導入前のMac環境の合成動画UI確認記録。原本は保持し、不足項目は補完しない。"
+    }
+  ]
+}

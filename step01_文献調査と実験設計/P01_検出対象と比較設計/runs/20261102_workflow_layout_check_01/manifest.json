@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "is_template": false,
+  "run_id": "20261102_workflow_layout_check_01",
+  "step_id": "step01",
+  "operation": "workflow_record_structure_check",
+  "method_id": null,
+  "purpose": "工程フォルダと参照文書の整合性確認。実データと研究モデルの評価ではない。",
+  "status": "completed",
+  "plan_version": "1.7",
+  "protocol_versions": {
+    "annotation": "draft-0.2",
+    "evaluation": "draft-0.1",
+    "dataset_split": null
+  },
+  "parent_run_ids": [],
+  "started_at": "2026-11-02T21:35:40.693100+09:00",
+  "finished_at": "2026-11-02T21:35:41.051483+09:00",
+  "command_argv": [
+    "python",
+    "step01_文献調査と実験設計/P01_検出対象と比較設計/runs/20261102_workflow_layout_check_01/code_snapshot/verify_workflow_layout.py",
+    "--root",
+    ".",
+    "--output",
+    "step01_文献調査と実験設計/P01_検出対象と比較設計/runs/20261102_workflow_layout_check_01/verification.json"
+  ],
+  "working_directory": ".",
+  "code": [
+    {
+      "id": "verify_workflow_layout.py",
+      "snapshot_ref": "code_snapshot/verify_workflow_layout.py",
+      "sha256": "408bd8bdc6a685e59ede03e0a4af990950feb0890a2a2dfd12d0ed046617e92a"
+    },
+    {
+      "id": "ai_records.py",
+      "snapshot_ref": "code_snapshot/ai_records.py",
+      "sha256": "7ec63eb7e5ce01367d5c31e697b6264eeec72b423c0c5430004400a8a0ed495f"
+    },
+    {
+      "id": "record_workflow_check.py",
+      "snapshot_ref": "code_snapshot/record_workflow_check.py",
+      "sha256": "597ca7fc00112ee9ac0efaf3843b50ea8f44dd59d85ad5617e02ac7e0fe899ea"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "research_state",
+      "role": "workflow_reference_snapshot",
+      "version": "1.7",
+      "sha256": "526f6605aff0f69bbf3a2671ee8e4fd17f5b9cecca5bcf9d441ee753b98600a3",
+      "storage": "repository",
+      "ref": "step01_文献調査と実験設計/P01_検出対象と比較設計/runs/20261102_workflow_layout_check_01/input_snapshot/research_state.json"
+    },
+    {
+      "id": "研究計画_詳細",
+      "role": "workflow_reference_snapshot",
+      "version": "1.7",
+      "sha256": "f51156b225fdc9c9ec311521739d868f8d39e42a665ea970c3d8800bda63853d",
+      "storage": "repository",
+      "ref": "step01_文献調査と実験設計/P01_検出対象と比較設計/runs/20261102_workflow_layout_check_01/input_snapshot/研究計画_詳細.md"
+    },
+    {
+      "id": "作業フォルダと発表根拠の運用",
+      "role": "workflow_reference_snapshot",
+      "version": "1.7",
+      "sha256": "87797e41bb74fdaed53359d02463ed47b94e1450e1b21c2c31ef213d490dd1d5",
+      "storage": "repository",
+      "ref": "step01_文献調査と実験設計/P01_検出対象と比較設計/runs/20261102_workflow_layout_check_01/input_snapshot/作業フォルダと発表根拠の運用.md"
+    }
+  ],
+  "config": {
+    "work_package_id": "P01",
+    "expected_package_count": 14,
+    "scope": "registered folders, dependencies and document links"
+  },
+  "environment": {
+    "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0"
+  },
+  "outputs": [
+    {
+      "id": "verification.json",
+      "role": "workflow_check_output",
+      "version": "1",
+      "sha256": "d4fe62bae2fb7257174f97f8af23f22c2e20922e08f60919e816f3a95da9c705",
+      "storage": "repository",
+      "ref": "step01_文献調査と実験設計/P01_検出対象と比較設計/runs/20261102_workflow_layout_check_01/verification.json"
+    },
+    {
+      "id": "process_output.txt",
+      "role": "workflow_check_output",
+      "version": "1",
+      "sha256": "fcc0695fe62c5144ba0f9a12e94adc13010631d9fce7298768cb8ae72852a45f",
+      "storage": "repository",
+      "ref": "step01_文献調査と実験設計/P01_検出対象と比較設計/runs/20261102_workflow_layout_check_01/process_output.txt"
+    }
+  ],
+  "metrics": {},
+  "validation": {
+    "status": "passed",
+    "checks": [
+      "工程の登録、専用フォルダ、依存関係、文書とリンクの存在を検査"
+    ]
+  },
+  "exit_code": 0,
+  "failure": null,
+  "reproduction": {
+    "status": "not_checked",
+    "command_argv": [
+      "python",
+      "step01_文献調査と実験設計/P01_検出対象と比較設計/runs/20261102_workflow_layout_check_01/code_snapshot/verify_workflow_layout.py",
+      "--root",
+      ".",
+      "--output",
+      "NEW_OUTPUT_PATH"
+    ],
+    "missing": [
+      "別環境での再実行は未確認",
+      "参照文書全体と存在するリンク先の版は完全には複製していない"
+    ]
+  },
+  "notes_ref": "step01_文献調査と実験設計/P01_検出対象と比較設計/runs/20261102_workflow_layout_check_01/実行結果.md"
+}

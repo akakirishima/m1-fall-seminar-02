@@ -1,14 +1,14 @@
 {
-  "name": "neonatal-research-midterm",
+  "name": "m1-seminar-02",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "slidev slides.md --port 3031",
-    "build": "slidev build slides.md",
-    "export": "slidev export slides.md --format pptx-editable --output exports/midterm-editable.pptx",
-    "export:pdf": "slidev export slides.md --format pdf --output exports/midterm.pdf",
-    "export:png": "slidev export slides.md --format png --output exports/png"
+    "dev": "slidev seminar.md --port 3032",
+    "build": "slidev build seminar.md",
+    "export": "powershell.exe -NoProfile -File scripts/export_native_pptx.ps1",
+    "export:pdf": "slidev export seminar.md --format pdf --output exports/seminar-02.pdf",
+    "export:png": "slidev export seminar.md --format png --output exports/png"
   },
   "engines": {
     "node": "^24.22.0"

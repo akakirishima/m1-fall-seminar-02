@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "generated_by": "research_tools/ai_records.py index",
+  "records": [
+    {
+      "run_id": "20261030_ai_record_structure_01",
+      "step_id": "step01",
+      "record_type": "legacy_record_check",
+      "operation": "record_check",
+      "status": "no_errors_reported",
+      "evidence_ref": "step01_文献調査と実験設計/runs/20261030_ai_record_structure_01/verification.json",
+      "registered_after_execution": true,
+      "provenance": "partial",
+      "model_experiment": false
+    },
+    {
+      "run_id": "20261030_critical_review_sources_01",
+      "step_id": "step01",
+      "record_type": "legacy_source_check",
+      "operation": "source_check",
+      "status": "no_errors_reported",
+      "evidence_ref": "step01_文献調査と実験設計/runs/20261030_critical_review_sources_01/sources.json",
+      "registered_after_execution": true,
+      "provenance": "partial",
+      "model_experiment": false
+    },
+    {
+      "run_id": "20261030_oss_sources_01",
+      "step_id": "step01",
+      "record_type": "legacy_source_check",
+      "operation": "source_check",
+      "status": "no_errors_reported",
+      "evidence_ref": "step01_文献調査と実験設計/runs/20261030_oss_sources_01/sources.json",
+      "registered_after_execution": true,
+      "provenance": "partial",
+      "model_experiment": false
+    },
+    {
+      "run_id": "20261030_preparation_check_01",
+      "step_id": "step01",
+      "record_type": "legacy_record_check",
+      "operation": "record_check",
+      "status": "no_errors_reported",
+      "evidence_ref": "step01_文献調査と実験設計/runs/20261030_preparation_check_01/verification.json",
+      "registered_after_execution": true,
+      "provenance": "partial",
+      "model_experiment": false
+    },
+    {
+      "run_id": "20261030_structure_check_01",
+      "step_id": "step01",
+      "record_type": "legacy_record_check",
+      "operation": "record_check",
+      "status": "no_errors_reported",
+      "evidence_ref": "step01_文献調査と実験設計/runs/20261030_structure_check_01/verification.json",
+      "registered_after_execution": true,
+      "provenance": "partial",
+      "model_experiment": false
+    },
+    {
+      "run_id": "20261030_structure_check_02",
+      "step_id": "step01",
+      "record_type": "legacy_record_check",
+      "operation": "record_check",
+      "status": "no_errors_reported",
+      "evidence_ref": "step01_文献調査と実験設計/runs/20261030_structure_check_02/verification.json",
+      "registered_after_execution": true,
+      "provenance": "partial",
+      "model_experiment": false
+    },
+    {
+      "run_id": "20261102_video_ui_02",
+      "step_id": "step02",
+      "record_type": "legacy_manifest",
+      "operation": "synthetic_video_ui_verification",
+      "status": "success",
+      "evidence_ref": "step02_正解データ作成/runs/20261102_video_ui_02/manifest.json",
+      "registered_after_execution": true,
+      "provenance": "partial",
+      "model_experiment": false,
+      "validation_status": "not_checked"
+    },
+    {
+      "run_id": "20261102_workflow_layout_check_01",
+      "step_id": "step01",
+      "work_package_id": "P01",
+      "record_type": "manifest",
+      "operation": "workflow_record_structure_check",
+      "status": "completed",
+      "manifest_ref": "step01_文献調査と実験設計/P01_検出対象と比較設計/runs/20261102_workflow_layout_check_01/manifest.json",
+      "parent_run_ids": [],
+      "record_check": "passed",
+      "record_errors": [],
+      "validation_status": "passed",
+      "reproduction_status": "not_checked"
+    }
+  ]
+}
