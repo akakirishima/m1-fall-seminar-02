@@ -1283,6 +1283,302 @@ source: '枠のみで未測定／実行IDは未登録／項目は評価方法の
 -->
 
 ---
+id: discussion-image-good
+chapter: 実験と結果
+class: result-shell discussion-shell
+sourceVisible: true
+source: '枠のみで未記入／実測後に保存した結果から書く／理由は確かめるまで仮説として扱う'
+---
+
+# 考察①：画像判定でうまくいった点
+
+::content::
+
+<p class="shell-status">未記入（枠のみ）</p>
+
+<p class="shell-lead">うまく判定できた手法と場面の理由を考える</p>
+
+<table class="shell-table">
+  <thead><tr><th>手法</th><th>何が起きたか</th><th>多分こうだから</th><th>どう確かめるか</th></tr></thead>
+  <tbody>
+    <tr><td>M1：学習なしVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M2：学習ありVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M3：分類器</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">見る観点：M1とM2の差、M3との差、患者、場面</p>
+
+::summary::
+
+うまくいった理由を、確かめられる形で書く
+
+<!--
+枠のみで、考察の内容ではない。実測後に、保存した結果を見て書く
+理由の候補（未検証）：追加学習で研究室映像の手や腕の見え方に合った、質問と回答形式が合っていた。M1とM2の差は追加学習以外の条件をそろえた比較でだけ、学習の効果として述べる
+最終評価を見て条件を変えない。変える場合は、その評価データを開発に使ったものとして扱い、手つかずの患者での評価を考える
+-->
+
+---
+id: discussion-image-bad
+chapter: 実験と結果
+class: result-shell discussion-shell
+sourceVisible: true
+source: '枠のみで未記入／実測後に保存した結果から書く／理由は確かめるまで仮説として扱う'
+---
+
+# 考察①：画像判定でうまくいかなかった点
+
+::content::
+
+<p class="shell-status">未記入（枠のみ）</p>
+
+<p class="shell-lead">判定を誤った手法と場面の理由を考える</p>
+
+<table class="shell-table">
+  <thead><tr><th>手法</th><th>何が起きたか</th><th>多分こうだから</th><th>どう確かめるか</th></tr></thead>
+  <tbody>
+    <tr><td>M1：学習なしVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M2：学習ありVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M3：分類器</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">見る観点：見逃しと誤検知、判定不能、誤りの多い場面</p>
+
+::summary::
+
+失敗の理由を、次に何を変えるかにつなげる
+
+<!--
+枠のみで、考察の内容ではない。実測後に、保存した結果を見て書く
+理由の候補（未検証）：指先だけ、手袋、反射、遮蔽、乳児の手、ROIの境界。IRには色がない。学習データの量や偏り。認識の誤りと回答形式の誤りを分ける
+最終評価を見て条件を変えない。変える場合は、その評価データを開発に使ったものとして扱い、手つかずの患者での評価を考える
+-->
+
+---
+id: discussion-time-good
+chapter: 実験と結果
+class: result-shell discussion-shell
+sourceVisible: true
+source: '枠のみで未記入／実測後に保存した結果から書く／理由は確かめるまで仮説として扱う'
+---
+
+# 考察①：推論時間でうまくいった点
+
+::content::
+
+<p class="shell-status">未記入（枠のみ）</p>
+
+<p class="shell-lead">速く処理できたモデルの理由を考える</p>
+
+<table class="shell-table">
+  <thead><tr><th>手法</th><th>何が起きたか</th><th>多分こうだから</th><th>どう確かめるか</th></tr></thead>
+  <tbody>
+    <tr><td>M1：学習なしVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M2：学習ありVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M3：分類器</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">見る観点：1枚あたりの平均、全体の時間、読み込み、メモリ</p>
+
+::summary::
+
+速かった理由と、使える動画の量を結びつける
+
+<!--
+枠のみで、考察の内容ではない。実測後に、保存した結果を見て書く
+理由の候補（未検証）：モデルの大きさ、入力画像の大きさ、VLMの出力の短さ。比較は1枚ずつの条件で、まとめて処理した場合の速さは分からない
+最終評価を見て条件を変えない。変える場合は、その評価データを開発に使ったものとして扱い、手つかずの患者での評価を考える
+-->
+
+---
+id: discussion-time-bad
+chapter: 実験と結果
+class: result-shell discussion-shell
+sourceVisible: true
+source: '枠のみで未記入／実測後に保存した結果から書く／理由は確かめるまで仮説として扱う'
+---
+
+# 考察①：推論時間でうまくいかなかった点
+
+::content::
+
+<p class="shell-status">未記入（枠のみ）</p>
+
+<p class="shell-lead">遅かったモデルと、時間のかかる処理の理由を考える</p>
+
+<table class="shell-table">
+  <thead><tr><th>手法</th><th>何が起きたか</th><th>多分こうだから</th><th>どう確かめるか</th></tr></thead>
+  <tbody>
+    <tr><td>M1：学習なしVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M2：学習ありVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M3：分類器</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">見る観点：1枚ごとのばらつき、出力の長さ、メモリの不足</p>
+
+::summary::
+
+遅さの原因と、許容できるかを確かめる
+
+<!--
+枠のみで、考察の内容ではない。実測後に、保存した結果を見て書く
+理由の候補（未検証）：生成が長い、GPUメモリの不足、前処理や回答の読み取りに時間がかかる。動画の量に対して現実的な時間かを、1枚あたりの平均と抽出枚数から見積もる
+最終評価を見て条件を変えない。変える場合は、その評価データを開発に使ったものとして扱い、手つかずの患者での評価を考える
+-->
+
+---
+id: discussion-interval-good
+chapter: 実験と結果
+class: result-shell discussion-shell
+sourceVisible: true
+source: '枠のみで未記入／実測後に保存した結果から書く／理由は確かめるまで仮説として扱う'
+---
+
+# 考察②：区間候補でうまくいった点
+
+::content::
+
+<p class="shell-status">未記入（枠のみ）</p>
+
+<p class="shell-lead">区間の指定に使えた手法の理由を考える</p>
+
+<table class="shell-table">
+  <thead><tr><th>手法</th><th>何が起きたか</th><th>多分こうだから</th><th>どう確かめるか</th></tr></thead>
+  <tbody>
+    <tr><td>M1：学習なしVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M2：学習ありVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M3：分類器</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">見る観点：正解区間を覆えた割合、開始終了のずれ</p>
+
+::summary::
+
+画像の判定が区間で役立った理由を書く
+
+<!--
+枠のみで、考察の内容ではない。実測後に、保存した結果を見て書く
+理由の候補（未検証）：映り込みが長く続く区間は、1枚ごとの誤りを区間化で吸収できる。区間化の設定をそろえた比較でM1とM2を述べる
+最終評価を見て条件を変えない。変える場合は、その評価データを開発に使ったものとして扱い、手つかずの患者での評価を考える
+-->
+
+---
+id: discussion-interval-bad
+chapter: 実験と結果
+class: result-shell discussion-shell
+sourceVisible: true
+source: '枠のみで未記入／実測後に保存した結果から書く／理由は確かめるまで仮説として扱う'
+---
+
+# 考察②：区間候補でうまくいかなかった点
+
+::content::
+
+<p class="shell-status">未記入（枠のみ）</p>
+
+<p class="shell-lead">見逃しや余計な除外が起きた理由を考える</p>
+
+<table class="shell-table">
+  <thead><tr><th>手法</th><th>何が起きたか</th><th>多分こうだから</th><th>どう確かめるか</th></tr></thead>
+  <tbody>
+    <tr><td>M1：学習なしVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M2：学習ありVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M3：分類器</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">見る観点：完全見逃し、余計な除外、短い区間</p>
+
+::summary::
+
+取りこぼしの原因が、抽出かモデルかを分ける
+
+<!--
+枠のみで、考察の内容ではない。実測後に、保存した結果を見て書く
+理由の候補（未検証）：抽出間隔より短い映り込み、モデルの誤判定、区間の結合や余裕時間の設定。抽出による取りこぼしとモデルの誤判定を分ける
+最終評価を見て条件を変えない。変える場合は、その評価データを開発に使ったものとして扱い、手つかずの患者での評価を考える
+-->
+
+---
+id: discussion-work-good
+chapter: 実験と結果
+class: result-shell discussion-shell
+sourceVisible: true
+source: '枠のみで未記入／実測後に保存した結果から書く／理由は確かめるまで仮説として扱う'
+---
+
+# 考察③：人の作業でうまくいった点
+
+::content::
+
+<p class="shell-status">未記入（枠のみ）</p>
+
+<p class="shell-lead">手作業より作業が減った手法の理由を考える</p>
+
+<table class="shell-table">
+  <thead><tr><th>手法</th><th>何が起きたか</th><th>多分こうだから</th><th>どう確かめるか</th></tr></thead>
+  <tbody>
+    <tr><td>M1：学習なしVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M2：学習ありVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M3：分類器</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">見る観点：M0との差、確認修正の時間、残った誤り</p>
+
+::summary::
+
+品質を保って時間が減った理由を書く
+
+<!--
+枠のみで、考察の内容ではない。実測後に、保存した結果を見て書く
+理由の候補（未検証）：入力の手間が減った、確認する範囲を絞れた。品質基準を満たす条件でだけ、時間の短縮として述べる。初期の注釈と学習の費用も合わせて見る
+最終評価を見て条件を変えない。変える場合は、その評価データを開発に使ったものとして扱い、手つかずの患者での評価を考える
+-->
+
+---
+id: discussion-work-bad
+chapter: 実験と結果
+class: result-shell discussion-shell
+sourceVisible: true
+source: '枠のみで未記入／実測後に保存した結果から書く／理由は確かめるまで仮説として扱う'
+---
+
+# 考察③：人の作業でうまくいかなかった点
+
+::content::
+
+<p class="shell-status">未記入（枠のみ）</p>
+
+<p class="shell-lead">作業が減らなかった手法の理由を考える</p>
+
+<table class="shell-table">
+  <thead><tr><th>手法</th><th>何が起きたか</th><th>多分こうだから</th><th>どう確かめるか</th></tr></thead>
+  <tbody>
+    <tr><td>M1：学習なしVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M2：学習ありVLM</td><td>－</td><td>－</td><td>－</td></tr>
+    <tr><td>M3：分類器</td><td>－</td><td>－</td><td>－</td></tr>
+  </tbody>
+</table>
+
+<p class="note">見る観点：候補の修正量、陰性区間の確認、作業の順序</p>
+
+::summary::
+
+時間が減らない原因と、運用の限界を確かめる
+
+<!--
+枠のみで、考察の内容ではない。実測後に、保存した結果を見て書く
+理由の候補（未検証）：全範囲の確認が残ると視聴時間が減らない、候補の誤りの修正に時間がかかる、既視聴の慣れで差が見えにくい。品質基準を満たさない方法は不成立として記録する
+最終評価を見て条件を変えない。変える場合は、その評価データを開発に使ったものとして扱い、手つかずの患者での評価を考える
+-->
+
+---
 layout: chapter-divider
 id: chapter-summary
 ---
