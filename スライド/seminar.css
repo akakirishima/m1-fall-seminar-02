@@ -164,16 +164,17 @@
 .seminar .status-table td { padding-top:15px; padding-bottom:15px; }
 .seminar .recap { margin-top:28px; }
 .seminar .recap p { margin-bottom:32px; font-size:34px; }
-/* 中間発表の表紙に合わせ、氏名・ロゴ・所属を下部中央へまとめる。 */
+/* 第1回研究報告の表紙に合わせ、右上に報告回の帯、下部に氏名・ロゴ・所属を置く。 */
+.seminar-cover-badge { position:absolute; top:29px; right:29px; padding:6px 16px; background:#9a4d07; color:#fff; font-size:30px; font-weight:700; line-height:1.2; white-space:nowrap; }
 .seminar-cover-title { position:absolute; left:75px; right:58px; top:302px; }
 .seminar-cover-title h1 { color:#111; font-size:48px; line-height:1.2; font-weight:700; margin:0; background:none; -webkit-text-fill-color:currentColor; }
 .seminar-cover-english { position:absolute; left:75px; right:70px; top:432px; font-size:24px; line-height:1.3; color:#222; }
-.seminar-cover-rule { position:absolute; top:510px; left:35px; right:12px; height:5px; border-radius:3px; background:var(--text-accent); }
+.seminar-cover-rule { position:absolute; top:510px; left:35px; right:12px; height:8px; border-radius:4px; background:linear-gradient(90deg,#f27509,#ffeadc); }
 .seminar-cover-advisor { position:absolute; top:540px; left:75px; right:70px; font-size:23px; font-weight:700; line-height:1.4; }
-.seminar-cover-bottom { position:absolute; left:50%; transform:translateX(-50%); bottom:78px; width:max-content; max-width:1050px; height:82px; display:grid; grid-template-columns:max-content max-content max-content; column-gap:40px; align-items:center; }
-.seminar-cover-author { font-size:32px; line-height:1.2; color:#444; font-weight:700; text-align:center; white-space:nowrap; }
+.seminar-cover-bottom { position:absolute; left:75px; right:29px; bottom:78px; height:82px; display:grid; grid-template-columns:245px 320px 1fr; align-items:center; }
+.seminar-cover-author { font-size:32px; line-height:1.2; color:#444; font-weight:700; white-space:nowrap; }
 .seminar-cover-author span { display:block; margin:0; font-size:20px; font-weight:400; }
-.seminar-cover-logo { height:78px; border-left:1px solid #bdbdbd; display:flex; align-items:center; padding-left:32px; }
+.seminar-cover-logo { height:78px; border-left:1px solid #bdbdbd; display:flex; align-items:center; padding-left:44px; }
 .seminar-cover-logo img { width:205px; height:auto; object-fit:contain; }
 .seminar-cover-affiliation { align-self:center; font-size:17px; line-height:1.55; color:#555; white-space:nowrap; }
 

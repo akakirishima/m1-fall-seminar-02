@@ -130,11 +130,11 @@
 .cover-logo img { width: 205px; height: auto; object-fit: contain; }
 .cover-affiliation { align-self: center; color: #555; font-size: 17px; line-height: 1.55; }
 
-/* 章扉：参考画像のように章題を一つだけ置き、下に細いオレンジ線を引く */
+/* 章扉：第1回の扉に合わせ、章題の下に本文と同じ右へ薄くなる線を引く */
 .slidev-layout.chapter-divider { position: relative; display: block; background: #fff; }
-.chapter-divider-title { position: absolute; top: 430px; left: 76px; right: 60px; }
-.chapter-divider-title h1 { margin: 0; color: #111; font-size: 50px; font-weight: 700; line-height: 1.3; }
-.chapter-divider-rule { position: absolute; top: 496px; left: 76px; right: 60px; height: 4px; background: #ed7d31; }
+.chapter-divider-title { position: absolute; top: 412px; left: 75px; right: 60px; }
+.chapter-divider-title h1 { margin: 0; color: #111; font-size: 46px; font-weight: 700; line-height: 1.3; }
+.chapter-divider-rule { position: absolute; top: 482px; left: 52px; right: 52px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #f27509, #ffeadc); }
 
 /* 表紙・結びも文字要素で構成し、PPTX上で編集できるようにする */
 .slidev-layout.cover { display: flex; flex-direction: column; justify-content: center; padding: 100px 88px; }
