@@ -19,11 +19,12 @@ Slidev 53.0.0、Node.js 24.22系を使用する。今回の動作確認は24.22.
 表示先は`http://localhost:3032/`。`project.ps1 build`で静的Web版を生成する。
 依存関係がない環境では、対応するNode.jsで`npm ci`を実行する。
 今回の依存関係は既存の中間発表フォルダと同版のnode_modulesをローカルのジャンクションで参照した。研究スライドの原稿とスタイルはこのフォルダ内に保存する。
-現在のPowerPoint版はWeb版の提案手法と各手法の解説を反映する前の[全37枚・標準表版](exports/seminar-02-native-tables-20261104.pptx)。13個の表をセル単位で編集できるPowerPoint標準の表に置き換え、全セルの本文・行列の一致とPowerPointでの全ページ描画を確認した。11枚目のテスト用コピーでセルの編集・保存・再読込も確認した。
+現在のPowerPoint版は[全60枚・スライドマスター版](exports/seminar-02-native-tables-20261104-232525.pptx)。見出しの棒、下の帯、氏名と所属、ページ番号をスライドマスターとレイアウトへ移した。38個の表はセル単位で編集できるPowerPoint標準の表で、全セルの本文・行列の一致とPowerPointでの全ページ描画を確認した。テスト用コピーでセルの編集・保存・再読込と、ページの削除と追加での番号の更新も確認した。11月4日午前の[全37枚版](exports/seminar-02-native-tables-20261104.pptx)は履歴として保持する。
 11月3日の[旧18枚版](exports/seminar-02-editable.pptx)は履歴として保持する。旧方式では表が文字と図形に分かれており、標準の表ではなかった。
 本文と表は編集可能。SVGで作った全体図と区間図は画像として入るため、それらの編集はWebの元部品から行う。PDFは未出力。
 Slidevの出力で見出しが上へずれる問題と、存在しないマスターの宣言を[scripts/finalize_seminar_pptx.py](scripts/finalize_seminar_pptx.py)で補正した。
-再出力は`project.ps1 export`を使う。[export_native_pptx.ps1](scripts/export_native_pptx.ps1)が原出力を保持し、見出しの補正、Web表の取得、PowerPoint標準の表への置換、全セル本文・行列の検査を行い、日時付きの新しいファイルをexportsへ保存する。PowerPointのインストールが必要。
+再出力は`project.ps1 export`を使う。[export_native_pptx.ps1](scripts/export_native_pptx.ps1)が原出力を保持し、見出しの補正、[スライドマスターへの移動](scripts/apply_slide_master.py)と[その検査](scripts/verify_slide_master.py)、Web表の取得、PowerPoint標準の表への置換、全セル本文・行列の検査を行い、日時付きの新しいファイルをexportsへ保存する。PowerPointとChromeのインストールが必要（Chrome以外は`-Browser`で指定する）。
+スライドマスターの内訳は、マスターに棒、帯、氏名と所属、番号の箱、自動のページ番号、レイアウトに章ごとの帯の文字（研究背景、課題、取り組み、実験と結果、まとめ、章なし）、表紙、章の扉の8種類。PowerPoint上でマスターを手で直しても再出力で上書きされるため、デザインの変更はWeb原稿と出力スクリプトで行う。想定と違う形のページがあれば、変換せずエラーで止まる。
 11月4日の原出力、表の取得情報、検査結果、PowerPointの確認画像はGit対象外の`../local_data/pptx_export_20261104_native_tables/`にある。旧18枚版の記録は`../local_data/pptx_export_20261103/`へ保持する。
 出力PPTXは参照写真を含むためGit対象外でローカルに保持する。
 

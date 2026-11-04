@@ -1953,13 +1953,14 @@ source: '前回のキーポイント推定・領域検出の評価で使用し�
 
 <div class="iou-row">
   <div>
-    <div class="appendix-equation">
-
-$$
-\mathrm{IoU}=\frac{\text{重なった領域の面積}}{\text{予測領域と正解領域を合わせた面積}}
-$$
-
-  </div>
+    <div class="appendix-equation iou-equation">
+      <div class="iou-name">IoU ＝</div>
+      <div class="iou-fraction">
+        <div>重なった領域の面積</div>
+        <div class="iou-fraction-line"></div>
+        <div>予測領域と正解領域を合わせた面積</div>
+      </div>
+    </div>
     <p class="point-label">例</p>
     <ul class="appendix-list">
       <li>完全に重なっている場合：<strong>IoU＝1</strong></li>

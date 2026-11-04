@@ -1,4 +1,7 @@
-param([string]$Output = '')
+param(
+    [string]$Output = '',
+    [string]$Browser = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
+)
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = New-Object Text.UTF8Encoding($false)
 $OutputEncoding = [Console]::OutputEncoding
@@ -26,7 +29,7 @@ try {
         }
         if (-not $ready) { throw 'Web slide server did not become ready.' }
     }
-    & $node $cli export seminar.md --format pptx-editable --output (Join-Path $work 'raw-export.pptx')
+    & $node $cli export seminar.md --format pptx-editable --executable-path $Browser --output (Join-Path $work 'raw-export.pptx')
     if ($LASTEXITCODE -ne 0) { throw 'Slidev export failed.' }
     & $node $npxCli --yes --package '@playwright/cli' playwright-cli "-s=$session" open 'http://localhost:3032/1'
     if ($LASTEXITCODE -ne 0) { throw 'Could not open table capture session.' }
@@ -36,9 +39,15 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Web table capture failed.' }
     & $python (Join-Path $PSScriptRoot 'finalize_seminar_pptx.py') (Join-Path $work 'raw-export.pptx') (Join-Path $work 'corrected-export.pptx') (Join-Path $work 'finalization.json')
     if ($LASTEXITCODE -ne 0) { throw 'Export correction failed.' }
-    & (Join-Path $PSScriptRoot 'replace_with_native_tables.ps1') -Source (Join-Path $work 'corrected-export.pptx') -TableData (Join-Path $work 'tables.json') -Output $Output -Report (Join-Path $work 'native-tables.json')
+    & $python (Join-Path $PSScriptRoot 'apply_slide_master.py') (Join-Path $work 'corrected-export.pptx') (Join-Path $work 'master-export.pptx') (Join-Path $work 'slide-master.json')
+    if ($LASTEXITCODE -ne 0) { throw 'Moving parts to the slide master failed.' }
+    & $python (Join-Path $PSScriptRoot 'verify_slide_master.py') (Join-Path $work 'corrected-export.pptx') (Join-Path $work 'master-export.pptx') (Join-Path $work 'slide-master-verification.json')
+    if ($LASTEXITCODE -ne 0) { throw 'Slide master validation failed.' }
+    & (Join-Path $PSScriptRoot 'replace_with_native_tables.ps1') -Source (Join-Path $work 'master-export.pptx') -TableData (Join-Path $work 'tables.json') -Output $Output -Report (Join-Path $work 'native-tables.json')
     & $python (Join-Path $PSScriptRoot 'verify_native_tables.py') $Output (Join-Path $work 'tables.json') (Join-Path $work 'verification.json')
     if ($LASTEXITCODE -ne 0) { throw 'Native table validation failed.' }
+    & $python (Join-Path $PSScriptRoot 'verify_slide_master.py') (Join-Path $work 'corrected-export.pptx') $Output (Join-Path $work 'final-slide-master-verification.json') --skip-body-text
+    if ($LASTEXITCODE -ne 0) { throw 'Final slide master validation failed.' }
     Write-Output "PowerPoint with native tables: $Output"
 } finally {
     & $node $npxCli --yes --package '@playwright/cli' playwright-cli "-s=$session" close
