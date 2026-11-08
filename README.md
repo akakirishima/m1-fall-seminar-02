@@ -1,5 +1,37 @@
 # M1後期第2回ゼミ
 
+## まず使う：Webスライドと編集可能PowerPoint
+
+PowerShellでリポジトリの`スライド`フォルダへ移動して実行する。以下はリポジトリ直下で開いたPowerShellにそのまま貼り付けられる。
+
+```powershell
+Set-Location .\スライド
+```
+
+### Webスライドを起動
+
+```powershell
+.\project.ps1 dev
+```
+
+ブラウザで <http://localhost:3032/> を開く。起動を止めるときはPowerShellで`Ctrl+C`。
+
+### 編集可能なPowerPointを書き出す
+
+```powershell
+.\project.ps1 export
+```
+
+完了後、`スライド\exports\`に日時付きのPPTXが作られる。本文と表はPowerPoint上で編集可能。図の一部は画像として入るため、図を直す場合はWebスライドの原稿や部品を編集して再出力する。書き出しにはNode.js 24.22系、npm依存関係、Chrome、PowerPointが必要。
+
+依存関係を初めて用意する場合は、Node.js 24.22系をインストールしてから次を実行する。
+
+```powershell
+npm ci
+```
+
+別の環境では`project.ps1`内のNode.js実行ファイルの場所を、その環境のNode.js 24.22系に合わせる。詳細と出力上の注意は[スライドREADME](スライド/README.md#起動書き出し)を参照。
+
 このフォルダでは、乳児映像の介入検知を中心とした研究計画、調査、実験、発表資料を管理する。
 身体部位分割との関係を含め、現在の研究方針は[研究全体像](研究全体像.md)にまとめる。
 
@@ -34,7 +66,7 @@ AIの開始時には`python research_tools/ai_records.py context`を使える。
 
 ## GitHubでの管理
 
-本人の依頼に基づき、[akakirishima/m1-fall-seminar-02](https://github.com/akakirishima/m1-fall-seminar-02)を非公開リポジトリとして使う。
+本人の依頼に基づき、[akakirishima/m1-fall-seminar-02](https://github.com/akakirishima/m1-fall-seminar-02)を公開リポジトリとして使う。2026年11月6日に非公開から公開へ変更した。
 2026年10月30日の管理構成整備時点ではGit未初期化だったが、その後の依頼でGitHub管理を追加した。
 
 研究管理文書、確認コード、実行記録の小さなJSON、スライドのソース、自作の編集可能PowerPointを管理対象にする。

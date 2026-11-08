@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "project_id": "m1-fall-seminar-02",
-  "updated_on": "2026-11-04",
-  "plan_version": "1.9",
+  "updated_on": "2026-11-08",
+  "plan_version": "1.10",
   "current_step": "step01",
   "objective": "乳児IR映像の固定ROI内に成人の手や腕が映る区間の検出を支援し、人による確認修正後に必要な品質を満たす条件で、手作業による区間指定の負担をどこまで削減できるか評価する。",
   "methods": [
@@ -95,7 +95,7 @@
   "documents": {
     "overview": "研究全体像.md",
     "decisions": "方針変更履歴.md",
-    "latest_daily_log": "日報/2026-11-04.md",
+    "latest_daily_log": "日報/2026-11-08.md",
     "annotation_protocol": "共通/ラベル付け規則.md",
     "evaluation_protocol": "共通/評価方法.md",
     "oss_registry": "共通/使用OSSと出典.md",
@@ -106,6 +106,8 @@
     "slide_references": "スライド/references/README.md",
     "workflow_protocol": "共通/作業フォルダと発表根拠の運用.md",
     "presentation_evidence": "スライド/発表根拠の対応表.md",
+    "presentation_assets": "スライド/画像配置とイラスト_20261104.md",
+    "model_selection_review": "調査/VLM選定の再点検_20261104.md",
     "presentation_plan": "スライド/パワポ制作計画_20261102.md",
     "web_slide_source": "スライド/seminar.md",
     "project_todo": "やること.md",
@@ -130,7 +132,12 @@
     "user_reply": "それがいいね研究目的とか変更あるかな？",
     "work_package_id": "P05",
     "scope": "本注釈の前に、割当済み開発患者の短い連続範囲で、固定ROI、注釈、時刻付き少数推論、区間化、人の確認修正までを一周する。",
-    "open_items": ["フレーム予測の適用時間範囲", "陰性の隙間をつなぐ条件", "前後の余裕時間", "判定不能と推論失敗の扱い"],
+    "open_items": [
+      "フレーム予測の適用時間範囲",
+      "陰性の隙間をつなぐ条件",
+      "前後の余裕時間",
+      "判定不能と推論失敗の扱い"
+    ],
     "readme": "step03_各手法の実装と実験/M1_学習なしQwen/P05_少数推論動作確認/README.md",
     "implemented": false,
     "executed": false
@@ -141,11 +148,24 @@
     "status": "agreed_not_verified_on_research_data",
     "scope": "撮影環境ごとに固定ROIを手動設定し、同じ環境の動画で共有する。",
     "environment_key": "setup_id",
-    "identity_and_version": ["roi_id", "roi_version"],
+    "identity_and_version": [
+      "roi_id",
+      "roi_version"
+    ],
     "reuse_check": "各動画で基準画像との位置一致を確認する。撮影日だけで再設定せず、環境が変われば別のROIを登録する。",
-    "change_conditions": ["カメラ位置", "画角", "解像度", "クロップ", "寝床配置"],
+    "change_conditions": [
+      "カメラ位置",
+      "画角",
+      "解像度",
+      "クロップ",
+      "寝床配置"
+    ],
     "mid_video_change": "変更時刻で適用範囲を分け、位置を確定できない範囲を判定不能として扱う。",
-    "open_items": ["ROIの囲み方と境界例", "モデルへのクロップまたはマスク等の適用方式", "環境別ROIの保存と動画対応機能の実装確認"],
+    "open_items": [
+      "ROIの囲み方と境界例",
+      "モデルへのクロップまたはマスク等の適用方式",
+      "環境別ROIの保存と動画対応機能の実装確認"
+    ],
     "evidence_ref": "step02_正解データ作成/ROI区間注釈のルール案.md"
   },
   "open_questions": [
@@ -202,7 +222,11 @@
     "overall_goal": "乳児の運動解析に向けた映像の選別と身体部位や動きの解析を支える。",
     "primary_target": "固定ROI内に成人の手や腕が画像上で見える区間を試行の主対象とする。詳細な境界と判定例は実動画で確定する。",
     "primary_question": "必要な完成品質を満たす区間指定の人手を、各方式でどこまで削減できるか。",
-    "evaluation_layers": ["画像判定", "区間候補", "人の確認修正後の完成品質と作業時間"],
+    "evaluation_layers": [
+      "画像判定",
+      "区間候補",
+      "人の確認修正後の完成品質と作業時間"
+    ],
     "comparison_scope": "M0、M1、M2、M3を維持。M1とM2は同じ基盤と条件、M2とM3は同じ専用学習対象を使う。",
     "downstream_analysis": "既存の運動特徴量が使える場合の接続確認は主比較後の候補。自発運動の保証や臨床的有用性の証明を今回の成果へ含めない。",
     "quality_acceptance_criteria": "未確定。用途と試行を踏まえて最終評価前に固定する。",
@@ -247,6 +271,14 @@
     "model_training": "not_run",
     "work_package_run_index": "implemented",
     "presentation_evidence_register": "source_and_plan_evidence_registered"
+  },
+  "repository": {
+    "name_with_owner": "akakirishima/m1-fall-seminar-02",
+    "url": "https://github.com/akakirishima/m1-fall-seminar-02",
+    "visibility": "public",
+    "verified_on": "2026-11-06",
+    "decision_id": "D014",
+    "research_status_change": false
   },
   "data_policy": {
     "raw_data_on_github": false,
