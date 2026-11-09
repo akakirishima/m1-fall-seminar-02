@@ -702,7 +702,7 @@ source: 'Qwen Team, Qwen3-VL Technical Report, arXiv:2511.21631, 2025／Qwen3.5-
     <tr><td>質問文（案）</td><td>成人の手または腕が見えますか<br>present、absent、uncertainの1語で回答</td></tr>
     <tr><td>推論の設定</td><td>1画像ずつ、思考を省いた直接回答から試す</td></tr>
     <tr><td>結果の保存</td><td>回答の原文、ラベル、状態（正常、判定不能、<br>形式違反、推論失敗）を画像ごとに残す</td></tr>
-    <tr><td>必要な準備</td><td>調整用の患者で、質問文と推論条件を選ぶ</td></tr>
+    <tr><td>必要な準備</td><td>開発用で質問とROI提示を試行し、調整用患者で条件を選ぶ</td></tr>
     <tr><td>測るもの</td><td>判定の成績、1画像の時間、最大GPUメモリ</td></tr>
   </tbody>
 </table>
@@ -719,6 +719,94 @@ source: 'Qwen Team, Qwen3-VL Technical Report, arXiv:2511.21631, 2025／Qwen3.5-
 判定不能、形式違反、推論失敗は陰性へ変換しない。正常回答だけの成績を全対象の成績と混同しない
 手順：環境の保存、一般画像1枚での読込と直接回答の確認、開発患者の少数画像での推論（P05）。いずれも未実施。速度、メモリ、判定精度は未測定
 最終評価の患者では質問文を調整しない。M1の「学習なし」は重みを更新しない意味で、質問の選定に使ったラベルの作業量は報告する
+-->
+
+---
+id: vlm-prompt-roi-pilot
+chapter: 取り組み
+class: method-detail method-dense
+sourceVisible: true
+source: '先行研究：Li et al., EMNLP 2023／Cai et al., CVPR 2024／本比較は未実施の提案'
+---
+
+# 追加試行①：VLMへの質問とROIの提示
+
+::content::
+
+<p class="lead">同じQwen・同じIR画像で、<strong>質問の詳しさ × ROIの見せ方</strong>を比較する</p>
+
+<table class="wide-first detail-table">
+  <thead><tr><th>ROIの提示</th><th>短い質問</th><th>詳しい質問</th></tr></thead>
+  <tbody>
+    <tr><td><strong>ROI内だけを表示</strong><br>外側をマスクして切り出す</td><td><strong>A</strong><br>成人の手・腕があるか</td><td><strong>B</strong><br>乳児の手や寝具などの除外条件も説明</td></tr>
+    <tr><td><strong>元画像＋ROIの輪郭</strong><br>周辺の情報も残す</td><td><strong>C</strong><br>指定領域の手・腕があるか</td><td><strong>D</strong><br>指定領域と除外条件を説明</td></tr>
+  </tbody>
+</table>
+
+<p class="note">共通：画像の時刻・基盤モデル・出力形式（present / absent / uncertain）をそろえる</p>
+<p class="note">先行研究：POPEは物体の存在質問、ViP-LLaVAは枠などの視覚的領域指定を扱う</p>
+
+::summary::
+
+質問の表現とROIの見せ方が判定結果に与える影響を、開発用データで確かめる
+
+<!--
+本スライドは研究室IR映像を用いた追加の予備実験案で、実測結果ではない
+ROIは撮影環境ごとに固定した多角形を基準にし、A/BではROI外をマスクした切り出し、C/Dでは元画像にその輪郭を重ねる。矩形の外接領域をそのままROI内とみなさない
+短い質問と詳しい質問は両方とも固定ROI内の成人の手や腕を主対象とする。詳しい質問では手袋、乳児自身の手、寝具・ケーブル・反射、ROI外のみの手、uncertainの扱いを明記する。触れたかどうかや職種は推測させない
+同じ時刻の元画像を条件ごとに変換し、モデル版、量子化、推論モード、出力上限、シード（該当する場合）を記録する。切り出しによる対象物の見かけの大きさや文脈の変化も含む入力表現の比較であり、純粋な「枠線だけの効果」とは断定しない
+POPEは一般物体の存在に関する二値質問であり、今回の3値分類やIR画像での成績を保証しない
+ViP-LLaVAは視覚マーカーを理解するように設計・学習されたモデルで、無調整QwenがROI輪郭を正しく理解する保証はない
+参考文献1：Li, Y., Du, Y., Zhou, K., Wang, J., Zhao, W. X., & Wen, J.-R. (2023). Evaluating Object Hallucination in Large Vision-Language Models. Proceedings of EMNLP 2023, 292–305. DOI: 10.18653/v1/2023.emnlp-main.20. https://aclanthology.org/2023.emnlp-main.20/
+参考文献2：Cai, M., Liu, H., Mustikovela, S. K., Meyer, G. P., Chai, Y., Park, D., & Lee, Y. J. (2024). ViP-LLaVA: Making Large Multimodal Models Understand Arbitrary Visual Prompts. Proceedings of CVPR 2024, 12914–12923. DOI: 10.1109/CVPR52733.2024.01227. https://openaccess.thecvf.com/content/CVPR2024/html/Cai_ViP-LLaVA_Making_Large_Multimodal_Models_Understand_Arbitrary_Visual_Prompts_CVPR_2024_paper.html
+追加の実験手順：step03_各手法の実装と実験/質問文とROI提示の予備比較案_20261109.md
+-->
+
+---
+id: vlm-prompt-roi-evaluation
+chapter: 取り組み
+class: method-detail method-dense
+sourceVisible: true
+source: '本研究のP03→P05→P08の試行案／Popov et al., NeurIPS 2025（専門画像での難しさ）'
+---
+
+# 追加試行②：どの質問条件を採用するか
+
+::content::
+
+<p class="lead">開発用の正解区間から同じ時刻の画像を作り、<strong>A〜Dを公平に比較</strong>する</p>
+
+<div class="flow-row">
+  <div class="flow-node">① 動画に<br>正解区間を付ける</div><span class="flow-arrow">→</span>
+  <div class="flow-node">② 同一時刻の画像を<br>4条件に変換</div><span class="flow-arrow">→</span>
+  <div class="flow-node focus">③ Qwenで判定<br>（追加学習なし）</div>
+</div>
+
+<table class="wide-first detail-table">
+  <tbody>
+    <tr><td><strong>対象データ</strong></td><td>開発用患者の連続注釈済み区間（最終評価患者は使わない）</td></tr>
+    <tr><td><strong>主に見ること</strong></td><td>手・腕の見逃し、再現率（Recall）、正解陽性区間の完全見逃し</td></tr>
+    <tr><td><strong>追加で見ること</strong></td><td>適合率、F1、ROI外・乳児の手の誤検出、判定不能率、推論時間</td></tr>
+    <tr><td><strong>次の実験へ</strong></td><td>調整用データで方式を選び、M1・M2で同じ質問とROI提示を使う</td></tr>
+  </tbody>
+</table>
+
+<p class="note">画像抽出で取りこぼした区間と、Qwenが見逃した区間は分けて記録する</p>
+
+::summary::
+
+質問方法の選定は準備実験とし、M1とM2の主比較は同一条件で実施する
+
+<!--
+追加の試行手順であり、どの条件が優れているかは未測定
+正解ラベルはまず元動画の連続した時間範囲に付ける。初期抽出間隔は1秒を候補とするが未確定。60秒間隔などは抽出の取りこぼしを別に評価する
+同じ画像ID・時刻・ROI版と、各条件の生成入力、質問全文、原回答、解析結果、推論時間を保存する
+元動画内に正解陽性区間があるのに抽出フレームが一枚も無い場合（抽出漏れ）と、陽性フレームはあるがすべて誤判定した場合（モデル誤判定）を別集計
+患者・動画単位の内訳、陽性区間の長さ分布も記録。データが少なければ予備的評価に限定する。最終評価患者で最適化しない
+uncertainを自動的にabsentへ変換しない。正解uncertain区間と未注釈範囲も陰性に含めない
+詳細質問の例と設定は step03_各手法の実装と実験/質問文とROI提示の予備比較案_20261109.md
+文献：Popov, M., Robicheaux, P., Madan, A., Robinson, I., Nelson, J., Ramanan, D., & Peri, N. (2025). Roboflow100-VL: A Multi-Domain Object Detection Benchmark for Vision-Language Models. Advances in Neural Information Processing Systems 38, Datasets and Benchmarks Track. DOI: 10.52202/085713-0363. https://papers.neurips.cc/paper_files/paper/2025/hash/1013f8ff40a194f3f12a6bcc5221bb34-Abstract-Datasets_and_Benchmarks_Track.html
+専門領域の難しさに関する参考文献であり、本研究の4条件が直接検証されたものではない
 -->
 
 ---
